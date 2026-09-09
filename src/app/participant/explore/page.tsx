@@ -6,17 +6,18 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Spinner } from "@/components/ui/spinner";
 import {
-  Search,
-  MapPin,
-  Users,
-  Calendar,
-  FlaskConical,
-  Clock,
-  DollarSign,
-  CheckCircle,
-  X,
-} from "lucide-react";
+  FiSearch,
+  FiMapPin,
+  FiUsers,
+  FiCalendar,
+  FiClock,
+  FiDollarSign,
+  FiCheckCircle,
+  FiX,
+} from "react-icons/fi";
+import { FaFlask } from "react-icons/fa";
 import { useAuth } from "@/hooks/use-auth";
 import { api } from "@/lib/mock-api";
 import { Event } from "@/types/event";
@@ -98,7 +99,7 @@ export default function ExplorePage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <Spinner size="lg" />
       </div>
     );
   }
@@ -106,17 +107,17 @@ export default function ExplorePage() {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Explore Opportunities</h1>
-        <p className="text-slate-500 mt-1">
+        <h1 className="text-2xl font-bold text-foreground">Explore Opportunities</h1>
+        <p className="text-muted-foreground mt-1">
           Discover events and research studies to join
         </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search
+          <FiSearch
             size={16}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
           />
           <Input
             placeholder="Search opportunities..."
@@ -129,7 +130,7 @@ export default function ExplorePage() {
           {["ALL", "EVENT", "RESEARCH"].map((type) => (
             <Button
               key={type}
-              variant={typeFilter === type ? "primary" : "outline"}
+              variant={typeFilter === type ? "default" : "outline"}
               size="sm"
               onClick={() => setTypeFilter(type)}
             >
@@ -141,30 +142,30 @@ export default function ExplorePage() {
 
       {filteredEvents.length > 0 && (
         <div>
-          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Calendar size={20} className="text-blue-600" /> Events
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-foreground">
+            <FiCalendar size={20} className="text-brand-600" /> Events
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredEvents.map((event) => (
-              <Card key={event.id} hover className="overflow-hidden">
+              <Card key={event.id} hover className="overflow-hidden border-border">
                 <div className="p-5">
                   <div className="flex items-start justify-between mb-3">
-                    <h3 className="font-semibold">{event.title}</h3>
+                    <h3 className="font-semibold text-foreground">{event.title}</h3>
                     <Badge variant="info">Event</Badge>
                   </div>
-                  <p className="text-sm text-slate-500 mb-3 line-clamp-2">
+                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                     {event.description}
                   </p>
-                  <div className="space-y-1 text-sm text-slate-500 mb-4">
+                  <div className="space-y-1 text-sm text-muted-foreground mb-4">
                     <div className="flex items-center gap-1">
-                      <MapPin size={14} /> {event.location}
+                      <FiMapPin size={14} /> {event.location}
                     </div>
                     <div className="flex items-center gap-1">
-                      <Users size={14} />
+                      <FiUsers size={14} />
                       {event.registeredCount}/{event.quota} registered
                     </div>
                     <div className="flex items-center gap-1">
-                      <Calendar size={14} />
+                      <FiCalendar size={14} />
                       {new Date(event.startDate).toLocaleDateString()}
                     </div>
                   </div>
@@ -174,7 +175,7 @@ export default function ExplorePage() {
                       className="w-full"
                       disabled
                     >
-                      <CheckCircle size={14} className="mr-2" /> Applied
+                      <FiCheckCircle size={14} className="mr-2" /> Applied
                     </Button>
                   ) : (
                     <Button
@@ -199,38 +200,38 @@ export default function ExplorePage() {
 
       {filteredResearch.length > 0 && (
         <div>
-          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-            <FlaskConical size={20} className="text-purple-600" /> Research
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-foreground">
+            <FaFlask size={20} className="text-purple-600" /> Research
             Studies
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredResearch.map((item) => (
-              <Card key={item.id} hover className="overflow-hidden">
+              <Card key={item.id} hover className="overflow-hidden border-border">
                 <div className="p-5">
                   <div className="flex items-start justify-between mb-3">
-                    <h3 className="font-semibold">{item.title}</h3>
+                    <h3 className="font-semibold text-foreground">{item.title}</h3>
                     <Badge variant="default">Research</Badge>
                   </div>
-                  <p className="text-sm text-slate-500 mb-3 line-clamp-2">
+                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                     {item.description}
                   </p>
-                  <div className="space-y-1 text-sm text-slate-500 mb-4">
+                  <div className="space-y-1 text-sm text-muted-foreground mb-4">
                     <div className="flex items-center gap-1">
-                      <FlaskConical size={14} /> {item.researcher}
+                      <FaFlask size={14} /> {item.researcher}
                     </div>
                     <div className="flex items-center gap-1">
-                      <Users size={14} />
+                      <FiUsers size={14} />
                       {item.currentParticipants}/
                       {item.requiredParticipants} participants
                     </div>
                     {item.duration && (
                       <div className="flex items-center gap-1">
-                        <Clock size={14} /> {item.duration}
+                        <FiClock size={14} /> {item.duration}
                       </div>
                     )}
                     {item.compensation && (
                       <div className="flex items-center gap-1">
-                        <DollarSign size={14} /> {item.compensation}
+                        <FiDollarSign size={14} /> {item.compensation}
                       </div>
                     )}
                   </div>
@@ -240,7 +241,7 @@ export default function ExplorePage() {
                       className="w-full"
                       disabled
                     >
-                      <CheckCircle size={14} className="mr-2" /> Applied
+                      <FiCheckCircle size={14} className="mr-2" /> Applied
                     </Button>
                   ) : (
                     <Button
@@ -265,11 +266,11 @@ export default function ExplorePage() {
 
       {filteredEvents.length === 0 && filteredResearch.length === 0 && (
         <div className="text-center py-12">
-          <Search
+          <FiSearch
             size={48}
-            className="mx-auto text-slate-300 mb-4"
+            className="mx-auto text-muted-foreground mb-4"
           />
-          <p className="text-slate-500">
+          <p className="text-muted-foreground">
             No opportunities found matching your search.
           </p>
         </div>
@@ -277,9 +278,9 @@ export default function ExplorePage() {
 
       {applyModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
+          <div className="bg-card rounded-xl shadow-xl w-full max-w-md mx-4 p-6 border border-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold">
+              <h3 className="text-lg font-semibold text-foreground">
                 Apply to {applyModal.title}
               </h3>
               <button
@@ -287,9 +288,9 @@ export default function ExplorePage() {
                   setApplyModal(null);
                   setMotivation("");
                 }}
-                className="text-slate-400 hover:text-slate-600"
+                className="text-muted-foreground hover:text-foreground"
               >
-                <X size={20} />
+                <FiX size={20} />
               </button>
             </div>
             <div className="space-y-4">

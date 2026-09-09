@@ -3,7 +3,7 @@ import { Opportunity } from "@/types/opportunity";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
-import { MapPin, User, Users, Clock } from "lucide-react";
+import { FiMapPin, FiUser, FiUsers, FiClock } from "react-icons/fi";
 
 interface OpportunityCardProps {
   opportunity: Opportunity;
@@ -45,23 +45,23 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
           <div className="flex items-center gap-4 text-sm text-slate-400 flex-wrap">
             {isEvent && "location" in opportunity && (
               <span className="flex items-center gap-1">
-                <MapPin size={14} />
+                <FiMapPin size={14} />
                 {(opportunity as { location: string }).location}
               </span>
             )}
             {!isEvent && "researcher" in opportunity && (
               <span className="flex items-center gap-1">
-                <User size={14} />
+                <FiUser size={14} />
                 {(opportunity as { researcher: string }).researcher}
               </span>
             )}
             <span className="flex items-center gap-1">
-              <Users size={14} />
+              <FiUsers size={14} />
               {opportunity.category}
             </span>
             {opportunity.deadline && (
               <span className="flex items-center gap-1">
-                <Clock size={14} />
+                <FiClock size={14} />
                 {new Date(opportunity.deadline).toLocaleDateString()}
               </span>
             )}

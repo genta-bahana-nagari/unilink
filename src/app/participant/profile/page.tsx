@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Save, User, Mail, Calendar, FileText } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
+import { FiSave, FiCalendar, FiFileText } from "react-icons/fi";
 import { useAuth } from "@/hooks/use-auth";
 import { api } from "@/lib/mock-api";
 import { Application } from "@/types/application";
@@ -78,7 +79,7 @@ export default function ProfilePage() {
   if (isLoading || !user) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <Spinner size="lg" />
       </div>
     );
   }
@@ -88,17 +89,17 @@ export default function ProfilePage() {
   return (
     <div className="p-6 max-w-3xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">My Profile</h1>
-        <p className="text-slate-500 mt-1">
+        <h1 className="text-2xl font-bold text-foreground">My Profile</h1>
+        <p className="text-muted-foreground mt-1">
           Manage your account information
         </p>
       </div>
 
-      <Card className="p-6">
+      <Card className="p-6 border-border">
         <div className="flex items-center gap-4 mb-6">
           <Avatar src={user.avatar} fallback={user.name} size="lg" />
           <div>
-            <h2 className="text-lg font-semibold">{user.name}</h2>
+            <h2 className="text-lg font-semibold text-foreground">{user.name}</h2>
             <Badge
               variant={
                 user.role === "ADMIN"
@@ -143,24 +144,24 @@ export default function ProfilePage() {
 
           <div className="flex justify-end gap-3">
             {saved && (
-              <p className="text-sm text-green-600 flex items-center gap-1">
-                <Save size={14} /> Saved successfully
+              <p className="text-sm text-success flex items-center gap-1">
+                <FiSave size={14} /> Saved successfully
               </p>
             )}
             <Button onClick={handleSave} disabled={isSaving}>
-              <Save size={16} className="mr-2" />
+              <FiSave size={16} className="mr-2" />
               {isSaving ? "Saving..." : "Save Changes"}
             </Button>
           </div>
         </div>
       </Card>
 
-      <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <FileText size={20} /> Application History
+      <Card className="p-6 border-border">
+        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-foreground">
+          <FiFileText size={20} /> Application History
         </h3>
         {applications.length === 0 ? (
-          <p className="text-slate-500 text-sm text-center py-4">
+          <p className="text-muted-foreground text-sm text-center py-4">
             No applications yet
           </p>
         ) : (
@@ -168,13 +169,13 @@ export default function ProfilePage() {
             {applications.map((app) => (
               <div
                 key={app.id}
-                className="flex items-center justify-between p-3 bg-slate-50 rounded-lg"
+                className="flex items-center justify-between p-3 bg-muted rounded-lg"
               >
                 <div>
-                  <p className="text-sm font-medium">
+                  <p className="text-sm font-medium text-foreground">
                     {getOppTitle(app.opportunityId)}
                   </p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-muted-foreground">
                     Applied{" "}
                     {new Date(app.appliedAt).toLocaleDateString()}
                   </p>
@@ -200,12 +201,12 @@ export default function ProfilePage() {
         )}
       </Card>
 
-      <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <Calendar size={20} /> Accepted Opportunities
+      <Card className="p-6 border-border">
+        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-foreground">
+          <FiCalendar size={20} /> Accepted Opportunities
         </h3>
         {accepted.length === 0 ? (
-          <p className="text-slate-500 text-sm text-center py-4">
+          <p className="text-muted-foreground text-sm text-center py-4">
             No accepted applications yet
           </p>
         ) : (
@@ -213,16 +214,16 @@ export default function ProfilePage() {
             {accepted.map((app) => (
               <div
                 key={app.id}
-                className="flex items-center gap-3 p-3 bg-green-50 rounded-lg border border-green-100"
+                className="flex items-center gap-3 p-3 bg-success-bg rounded-lg border border-success-border"
               >
-                <div className="p-2 bg-white rounded-lg">
-                  <Calendar size={16} className="text-green-600" />
+                <div className="p-2 bg-card rounded-lg">
+                  <FiCalendar size={16} className="text-success" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium">
+                  <p className="text-sm font-medium text-foreground">
                     {getOppTitle(app.opportunityId)}
                   </p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-muted-foreground">
                     Accepted on{" "}
                     {app.updatedAt
                       ? new Date(app.updatedAt).toLocaleDateString()

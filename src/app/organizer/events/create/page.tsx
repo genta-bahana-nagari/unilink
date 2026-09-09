@@ -8,7 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowLeft, Save } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
+import { FiArrowLeft, FiSave } from "react-icons/fi";
 import Link from "next/link";
 import { useAuth } from "@/hooks/use-auth";
 import { api } from "@/lib/mock-api";
@@ -90,7 +91,7 @@ export default function CreateEventPage() {
   if (!user) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <Spinner size="lg" />
       </div>
     );
   }
@@ -100,18 +101,18 @@ export default function CreateEventPage() {
       <div className="flex items-center gap-4">
         <Link href="/organizer/events">
           <Button variant="ghost" size="sm">
-            <ArrowLeft size={16} className="mr-1" /> Back
+            <FiArrowLeft size={16} className="mr-1" /> Back
           </Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold">Create Event</h1>
-          <p className="text-slate-500 mt-1">
+          <h1 className="text-2xl font-bold text-foreground">Create Event</h1>
+          <p className="text-muted-foreground mt-1">
             Fill in the details to create a new event
           </p>
         </div>
       </div>
 
-      <Card className="p-6">
+      <Card className="p-6 border-border">
         <form onSubmit={handleSubmit} className="space-y-6">
           <Input
             label="Title"
@@ -222,7 +223,7 @@ export default function CreateEventPage() {
           )}
 
           {errors.submit && (
-            <p className="text-sm text-red-600">{errors.submit}</p>
+            <p className="text-sm text-danger">{errors.submit}</p>
           )}
 
           <div className="flex justify-end gap-3">
@@ -232,7 +233,7 @@ export default function CreateEventPage() {
               </Button>
             </Link>
             <Button type="submit" disabled={isSubmitting}>
-              <Save size={16} className="mr-2" />
+              <FiSave size={16} className="mr-2" />
               {isSubmitting ? "Creating..." : "Create Event"}
             </Button>
           </div>

@@ -1,36 +1,222 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UniLink - Crowdsourcing Platform
+
+> **Connect. Collaborate. Create Impact.**
+
+UniLink is a modern, professional crowdsourcing platform built with Next.js 16, React 19, and Tailwind CSS 4. It connects organizations, researchers, and skilled participants for research studies, events, and impactful collaborations.
+
+## Features
+
+### For Researchers & Organizations
+
+- **Smart Project Management** - Create and manage research studies and events
+- **Participant Matching** - Find qualified participants with the right skills
+- **Real-time Analytics** - Track engagement, applications, and success metrics
+- **Team Collaboration** - Coordinate with your research team
+- **Approval Workflows** - Manage submissions with built-in review processes
+
+### For Participants
+
+- **Discover Opportunities** - Browse hundreds of research studies and events
+- **Personalized Recommendations** - Get matched based on your skills and interests
+- **Application Tracking** - Monitor your applications in one dashboard
+- **Skill Development** - Gain experience through meaningful contributions
+- **Community Access** - Connect with researchers and fellow participants
+
+### Platform Features
+
+- **Responsive Design** - Works seamlessly on desktop, tablet, and mobile
+- **Dark Mode Support** - Easy on the eyes for extended use
+- **SEO Optimized** - Built-in metadata, sitemaps, and structured data
+- **Accessibility First** - WCAG 2.1 compliant with keyboard navigation
+- **Type-Safe** - Full TypeScript support for reliable code
+
+## Tech Stack
+
+| Category        | Technology              |
+| --------------- | ----------------------- |
+| Framework       | Next.js 16 (App Router) |
+| Language        | TypeScript 5            |
+| UI Library      | React 19                |
+| Styling         | Tailwind CSS 4          |
+| Icons           | Lucide React            |
+| Package Manager | pnpm                    |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- **Node.js** 18.17 or later
+- **pnpm** 8.0 or later (recommended)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Clone the repository
+git clone https://github.com/your-org/unilink.git
+
+# Navigate to project directory
+cd unilink
+
+# Install dependencies
+pnpm install
+
+# Run development server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command      | Description              |
+| ------------ | ------------------------ |
+| `pnpm dev`   | Start development server |
+| `pnpm build` | Build for production     |
+| `pnpm start` | Start production server  |
+| `pnpm lint`  | Run ESLint               |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+unilink/
+├── public/                 # Static assets
+│   └── images/
+│       ├── events/
+│       ├── research/
+│       └── avatars/
+├── src/
+│   ├── app/               # App Router pages
+│   │   ├── (public)/      # Public routes
+│   │   ├── auth/          # Authentication
+│   │   ├── admin/         # Admin dashboard
+│   │   ├── organizer/     # Organizer dashboard
+│   │   └── participant/   # Participant dashboard
+│   ├── components/        # React components
+│   │   ├── ui/            # Base UI components
+│   │   ├── layout/        # Layout components
+│   │   ├── dashboard/     # Dashboard widgets
+│   │   └── [feature]/     # Feature components
+│   ├── config/            # Configuration
+│   ├── data/              # Mock data
+│   ├── hooks/             # Custom React hooks
+│   ├── lib/               # Utilities
+│   └── types/             # TypeScript types
+├── tailwind.config.ts     # Tailwind configuration
+├── next.config.ts         # Next.js configuration
+└── package.json
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design System
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Colors
 
-## Deploy on Vercel
+The platform uses a professional color palette designed for trust and clarity:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Primary**: Indigo/Blue gradient (`#4c6ef5`)
+- **Success**: Green (`#16a34a`)
+- **Warning**: Amber (`#d97706`)
+- **Danger**: Red (`#dc2626`)
+- **Neutral**: Slate gray palette
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Typography
+
+- **Headings**: Geist Sans (system font)
+- **Body**: Geist Sans (system font)
+- **Monospace**: Geist Mono
+
+### Components
+
+All UI components follow these principles:
+
+- Accessible by default (WCAG 2.1)
+- Keyboard navigable
+- Screen reader friendly
+- Responsive design
+- Consistent styling
+
+## User Roles
+
+### Administrator
+
+- Manage users and organizers
+- Approve/reject submissions
+- Monitor platform activity
+- Configure platform settings
+
+### Organizer
+
+- Create and manage events/research
+- Review applications
+- Track participant engagement
+- Manage announcements
+
+### Participant
+
+- Browse opportunities
+- Submit applications
+- Track application status
+- Manage profile
+
+## Development
+
+### Adding a New Feature
+
+1. Create types in `src/types/`
+2. Add mock data in `src/data/`
+3. Create components in `src/components/`
+4. Build pages in `src/app/`
+5. Add hooks in `src/hooks/` if needed
+
+### Code Quality
+
+- **Linting**: ESLint with Next.js config
+- **Formatting**: Prettier (recommended)
+- **Types**: Strict TypeScript
+- **Testing**: Add tests for critical paths
+
+## Deployment
+
+### Vercel (Recommended)
+
+```bash
+# Install Vercel CLI
+pnpm add -g vercel
+
+# Deploy
+vercel
+```
+
+### Other Platforms
+
+The application can be deployed to any Node.js hosting platform:
+
+```bash
+# Build
+pnpm build
+
+# Start
+pnpm start
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+- **Documentation**: [docs.unilink.com](https://docs.unilink.com)
+- **Issues**: [GitHub Issues](https://github.com/your-org/unilink/issues)
+- **Email**: support@unilink.com
+- **Discord**: [Join our community](https://discord.gg/unilink)
+
+---
+
+Built with ❤️ for the crowds that matter.

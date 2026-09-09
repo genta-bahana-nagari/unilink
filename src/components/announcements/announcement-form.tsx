@@ -6,7 +6,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { api } from "@/lib/mock-api";
 import { Announcement } from "@/types/announcement";
 

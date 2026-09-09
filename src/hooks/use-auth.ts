@@ -26,7 +26,7 @@ export function useAuth() {
     }
   }, []);
 
-  const login = useCallback(async (email: string, password: string) => {
+  const login = useCallback(async (email: string) => {
     setIsLoading(true);
     try {
       const users = await api.getUsers();
@@ -40,7 +40,7 @@ export function useAuth() {
         return { success: true, user: foundUser };
       }
       return { success: false, error: "User not found" };
-    } catch (error) {
+    } catch {
       return { success: false, error: "Login failed" };
     } finally {
       setIsLoading(false);
@@ -56,7 +56,7 @@ export function useAuth() {
       setUser(newUser);
       setRole(newUser.role);
       return { success: true, user: newUser };
-    } catch (error) {
+    } catch {
       return { success: false, error: "Registration failed" };
     } finally {
       setIsLoading(false);
@@ -83,7 +83,7 @@ export function useAuth() {
         return { success: true, user: foundUser };
       }
       return { success: false, error: "No user found" };
-    } catch (error) {
+    } catch {
       return { success: false, error: "Login failed" };
     } finally {
       setIsLoading(false);

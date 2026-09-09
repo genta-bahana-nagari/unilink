@@ -2,7 +2,8 @@ import { User } from "@/types/user";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
-import { ApplicationStatus } from "./application-status";
+import { ApplicationStatus } from "../applications/application-status";
+import { Spinner } from "@/components/ui/spinner";
 
 interface ApplicantTableProps {
   applicants: User[];
@@ -18,7 +19,7 @@ export function ApplicantTable({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <Spinner size="lg" />
       </div>
     );
   }

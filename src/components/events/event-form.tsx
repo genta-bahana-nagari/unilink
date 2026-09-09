@@ -7,11 +7,8 @@ import { Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { useEvents } from "@/hooks/use-events";
-import { useResearch } from "@/hooks/use-research";
 import { Event } from "@/types/event";
-import { Research } from "@/types/research";
 
 interface EventFormProps {
   event?: Event;

@@ -2,7 +2,7 @@ import { Opportunity } from "@/types/opportunity";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, User, Clock } from "lucide-react";
+import { FiMapPin, FiUser, FiClock } from "react-icons/fi";
 
 interface OpportunityDetailProps {
   opportunity: Opportunity;
@@ -50,7 +50,7 @@ export function OpportunityDetail({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         {isEvent && "location" in opportunity && (
           <div className="flex items-center gap-3">
-            <MapPin size={18} className="text-slate-400" />
+            <FiMapPin size={18} className="text-slate-400" />
             <div>
               <p className="text-xs text-slate-400">Location</p>
               <p className="text-sm font-medium">
@@ -61,7 +61,7 @@ export function OpportunityDetail({
         )}
         {!isEvent && "researcher" in opportunity && (
           <div className="flex items-center gap-3">
-            <User size={18} className="text-slate-400" />
+            <FiUser size={18} className="text-slate-400" />
             <div>
               <p className="text-xs text-slate-400">Researcher</p>
               <p className="text-sm font-medium">
@@ -72,7 +72,7 @@ export function OpportunityDetail({
         )}
         {opportunity.deadline && (
           <div className="flex items-center gap-3">
-            <Clock size={18} className="text-slate-400" />
+            <FiClock size={18} className="text-slate-400" />
             <div>
               <p className="text-xs text-slate-400">Application Deadline</p>
               <p className="text-sm font-medium">

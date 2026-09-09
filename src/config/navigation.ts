@@ -1,52 +1,52 @@
 import {
-  LayoutDashboard,
-  Users,
-  Calendar,
-  FlaskConical,
-  Bell,
-  CheckCircle,
-  User,
-  ListChecks,
-  Megaphone,
-  Search,
-} from "lucide-react";
+  FiLayout,
+  FiUsers,
+  FiCalendar,
+  FiBell,
+  FiCheckCircle,
+  FiUser,
+  FiList,
+  FiSearch,
+} from "react-icons/fi";
+import { FaFlask } from "react-icons/fa";
+import { IconType } from "react-icons";
 
 export interface NavigationItem {
   label: string;
   href: string;
-  icon: any;
+  icon: IconType;
   exact?: boolean;
 }
 
 export const adminNavigation: NavigationItem[] = [
-  { label: "Dashboard", href: "/admin", icon: LayoutDashboard, exact: true },
-  { label: "Users", href: "/admin/users", icon: Users },
-  { label: "Organizers", href: "/admin/organizers", icon: Users },
-  { label: "Events", href: "/admin/events", icon: Calendar },
-  { label: "Research", href: "/admin/research", icon: FlaskConical },
-  { label: "Announcements", href: "/admin/announcements", icon: Bell },
-  { label: "Approvals", href: "/admin/approvals", icon: CheckCircle },
+  { label: "Dashboard", href: "/admin", icon: FiLayout, exact: true },
+  { label: "Users", href: "/admin/users", icon: FiUsers },
+  { label: "Organizers", href: "/admin/organizers", icon: FiUsers },
+  { label: "Events", href: "/admin/events", icon: FiCalendar },
+  { label: "Research", href: "/admin/research", icon: FaFlask },
+  { label: "Announcements", href: "/admin/announcements", icon: FiBell },
+  { label: "Approvals", href: "/admin/approvals", icon: FiCheckCircle },
 ];
 
 export const organizerNavigation: NavigationItem[] = [
-  { label: "Dashboard", href: "/organizer", icon: LayoutDashboard, exact: true },
-  { label: "Events", href: "/organizer/events", icon: Calendar },
-  { label: "Research", href: "/organizer/research", icon: FlaskConical },
-  { label: "Announcements", href: "/organizer/announcements", icon: Megaphone },
-  { label: "Profile", href: "/organizer/profile", icon: User },
+  { label: "Dashboard", href: "/organizer", icon: FiLayout, exact: true },
+  { label: "Events", href: "/organizer/events", icon: FiCalendar },
+  { label: "Research", href: "/organizer/research", icon: FaFlask },
+  { label: "Announcements", href: "/organizer/announcements", icon: FiBell },
+  { label: "Profile", href: "/organizer/profile", icon: FiUser },
 ];
 
 export const participantNavigation: NavigationItem[] = [
-  { label: "Dashboard", href: "/participant", icon: LayoutDashboard, exact: true },
-  { label: "Explore", href: "/participant/explore", icon: Search },
-  { label: "Applications", href: "/participant/applications", icon: ListChecks },
-  { label: "Profile", href: "/participant/profile", icon: User },
+  { label: "Dashboard", href: "/participant", icon: FiLayout, exact: true },
+  { label: "Explore", href: "/participant/explore", icon: FiSearch },
+  { label: "Applications", href: "/participant/applications", icon: FiList },
+  { label: "Profile", href: "/participant/profile", icon: FiUser },
 ];
 
 export const publicNavigation: NavigationItem[] = [
-  { label: "Events", href: "/events", icon: Calendar },
-  { label: "Research", href: "/research", icon: FlaskConical },
-  { label: "Announcements", href: "/announcements", icon: Bell },
+  { label: "Events", href: "/events", icon: FiCalendar },
+  { label: "Research", href: "/research", icon: FaFlask },
+  { label: "Announcements", href: "/announcements", icon: FiBell },
 ];
 
 export function getNavigationByRole(role: string | null): NavigationItem[] {

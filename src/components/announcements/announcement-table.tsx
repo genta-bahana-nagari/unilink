@@ -1,7 +1,6 @@
 import { Announcement } from "@/types/announcement";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { AnnouncementCard } from "./announcement-card";
 import { Spinner } from "@/components/ui/spinner";
 
 interface AnnouncementTableProps {

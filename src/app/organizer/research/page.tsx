@@ -5,15 +5,16 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import {
-  Search,
-  Plus,
-  Users,
-  Clock,
-  DollarSign,
-  Pencil,
-  Trash2,
-} from "lucide-react";
+  FiSearch,
+  FiPlus,
+  FiUsers,
+  FiClock,
+  FiDollarSign,
+  FiEdit3,
+  FiTrash2,
+} from "react-icons/fi";
 import Link from "next/link";
 import { useAuth } from "@/hooks/use-auth";
 import { api } from "@/lib/mock-api";
@@ -67,7 +68,7 @@ export default function OrganizerResearchPage() {
   if (isLoading || !user) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <Spinner size="lg" />
       </div>
     );
   }
@@ -76,23 +77,23 @@ export default function OrganizerResearchPage() {
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">My Research</h1>
-          <p className="text-slate-500 mt-1">
+          <h1 className="text-2xl font-bold text-foreground">My Research</h1>
+          <p className="text-muted-foreground mt-1">
             Manage your research studies
           </p>
         </div>
         <Link href="/organizer/research/create">
           <Button>
-            <Plus size={16} className="mr-2" /> Create Research
+            <FiPlus size={16} className="mr-2" /> Create Research
           </Button>
         </Link>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search
+          <FiSearch
             size={16}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
           />
           <Input
             placeholder="Search research..."
@@ -105,7 +106,7 @@ export default function OrganizerResearchPage() {
           {["ALL", "PUBLISHED", "PENDING", "DRAFT"].map((status) => (
             <Button
               key={status}
-              variant={statusFilter === status ? "primary" : "outline"}
+              variant={statusFilter === status ? "default" : "outline"}
               size="sm"
               onClick={() => setStatusFilter(status)}
             >
@@ -119,52 +120,52 @@ export default function OrganizerResearchPage() {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-slate-200">
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+              <tr className="border-b border-border">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Study
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Participants
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Duration
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Compensation
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Status
                 </th>
-                <th className="text-right text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-right text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-border">
               {filtered.map((item) => (
-                <tr key={item.id} className="hover:bg-slate-50">
+                <tr key={item.id} className="hover:bg-muted">
                   <td className="px-6 py-4">
-                    <p className="text-sm font-medium">{item.title}</p>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-sm font-medium text-foreground">{item.title}</p>
+                    <p className="text-xs text-muted-foreground">
                       {item.category}
                     </p>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="flex items-center gap-1 text-sm text-slate-600">
-                      <Users size={14} />
+                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <FiUsers size={14} />
                       {item.currentParticipants}/
                       {item.requiredParticipants}
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="flex items-center gap-1 text-sm text-slate-600">
-                      <Clock size={14} />
+                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <FiClock size={14} />
                       {item.duration || "N/A"}
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="flex items-center gap-1 text-sm text-slate-600">
-                      <DollarSign size={14} />
+                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <FiDollarSign size={14} />
                       {item.compensation || "N/A"}
                     </span>
                   </td>
@@ -177,14 +178,14 @@ export default function OrganizerResearchPage() {
                         href={`/organizer/research/${item.id}/edit`}
                       >
                         <Button variant="ghost" size="sm">
-                          <Pencil size={14} />
+                          <FiEdit3 size={14} />
                         </Button>
                       </Link>
                       <Link
                         href={`/organizer/research/${item.id}/applicants`}
                       >
                         <Button variant="ghost" size="sm">
-                          <Users size={14} />
+                          <FiUsers size={14} />
                         </Button>
                       </Link>
                       <Button
@@ -192,7 +193,7 @@ export default function OrganizerResearchPage() {
                         size="sm"
                         onClick={() => handleDelete(item.id)}
                       >
-                        <Trash2 size={14} className="text-red-500" />
+                        <FiTrash2 size={14} className="text-danger" />
                       </Button>
                     </div>
                   </td>
@@ -202,7 +203,7 @@ export default function OrganizerResearchPage() {
                 <tr>
                   <td
                     colSpan={6}
-                    className="px-6 py-8 text-center text-slate-500"
+                    className="px-6 py-8 text-center text-muted-foreground"
                   >
                     No research studies found
                   </td>

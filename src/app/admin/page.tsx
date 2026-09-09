@@ -6,14 +6,14 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
+import { Spinner } from "@/components/ui/spinner";
 import {
-  Users,
-  Calendar,
-  FlaskConical,
-  CheckCircle,
-  Clock,
-  ArrowRight,
-} from "lucide-react";
+  FiUsers,
+  FiCalendar,
+  FiCheckCircle,
+  FiArrowRight,
+} from "react-icons/fi";
+import { FaFlask } from "react-icons/fa";
 import Link from "next/link";
 import { api } from "@/lib/mock-api";
 import { User } from "@/types/user";
@@ -48,7 +48,7 @@ export default function AdminDashboardPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <Spinner size="lg" />
       </div>
     );
   }
@@ -81,8 +81,8 @@ export default function AdminDashboardPage() {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-        <p className="text-slate-500 mt-1">
+        <h1 className="text-2xl font-bold text-foreground">Admin Dashboard</h1>
+        <p className="text-muted-foreground mt-1">
           Overview of platform activity and pending items
         </p>
       </div>
@@ -91,41 +91,41 @@ export default function AdminDashboardPage() {
         <StatCard
           title="Total Users"
           value={users.length}
-          icon={Users}
+          icon={FiUsers}
           description={`${users.filter((u) => u.role === "PARTICIPANT").length} participants`}
         />
         <StatCard
           title="Total Events"
           value={events.length}
-          icon={Calendar}
+          icon={FiCalendar}
           description={`${events.filter((e) => e.status === "PUBLISHED").length} published`}
         />
         <StatCard
           title="Research Studies"
           value={research.length}
-          icon={FlaskConical}
+          icon={FaFlask}
           description={`${research.filter((r) => r.status === "PUBLISHED").length} published`}
         />
         <StatCard
           title="Pending Approvals"
           value={pendingApprovals.length}
-          icon={CheckCircle}
+          icon={FiCheckCircle}
           description={`${pendingApplications.length} applications pending`}
         />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="p-6">
+        <Card className="p-6 border-border">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Pending Approvals</h2>
+            <h2 className="text-lg font-semibold text-foreground">Pending Approvals</h2>
             <Link href="/admin/approvals">
               <Button variant="ghost" size="sm">
-                View All <ArrowRight size={14} className="ml-1" />
+                View All <FiArrowRight size={14} className="ml-1" />
               </Button>
             </Link>
           </div>
           {pendingApprovals.length === 0 ? (
-            <p className="text-slate-500 text-sm py-4 text-center">
+            <p className="text-muted-foreground text-sm py-4 text-center">
               No pending approvals
             </p>
           ) : (
@@ -133,19 +133,19 @@ export default function AdminDashboardPage() {
               {pendingApprovals.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center justify-between p-3 bg-slate-50 rounded-lg"
+                  className="flex items-center justify-between p-3 bg-muted rounded-lg"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-white rounded-lg border border-slate-200">
+                    <div className="p-2 bg-card rounded-lg border border-border">
                       {item.type === "EVENT" ? (
-                        <Calendar size={16} className="text-blue-600" />
+                        <FiCalendar size={16} className="text-brand-600" />
                       ) : (
-                        <FlaskConical size={16} className="text-purple-600" />
+                        <FaFlask size={16} className="text-purple-600" />
                       )}
                     </div>
                     <div>
-                      <p className="text-sm font-medium">{item.title}</p>
-                      <p className="text-xs text-slate-500">{item.type}</p>
+                      <p className="text-sm font-medium text-foreground">{item.title}</p>
+                      <p className="text-xs text-muted-foreground">{item.type}</p>
                     </div>
                   </div>
                   <Badge variant="warning">Pending</Badge>
@@ -155,12 +155,12 @@ export default function AdminDashboardPage() {
           )}
         </Card>
 
-        <Card className="p-6">
+        <Card className="p-6 border-border">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Recent Users</h2>
+            <h2 className="text-lg font-semibold text-foreground">Recent Users</h2>
             <Link href="/admin/users">
               <Button variant="ghost" size="sm">
-                View All <ArrowRight size={14} className="ml-1" />
+                View All <FiArrowRight size={14} className="ml-1" />
               </Button>
             </Link>
           </div>
@@ -168,7 +168,7 @@ export default function AdminDashboardPage() {
             {users.slice(0, 5).map((user) => (
               <div
                 key={user.id}
-                className="flex items-center justify-between p-3 bg-slate-50 rounded-lg"
+                className="flex items-center justify-between p-3 bg-muted rounded-lg"
               >
                 <div className="flex items-center gap-3">
                   <Avatar
@@ -177,8 +177,8 @@ export default function AdminDashboardPage() {
                     size="sm"
                   />
                   <div>
-                    <p className="text-sm font-medium">{user.name}</p>
-                    <p className="text-xs text-slate-500">{user.email}</p>
+                    <p className="text-sm font-medium text-foreground">{user.name}</p>
+                    <p className="text-xs text-muted-foreground">{user.email}</p>
                   </div>
                 </div>
                 <Badge

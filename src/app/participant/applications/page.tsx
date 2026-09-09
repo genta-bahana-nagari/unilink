@@ -5,16 +5,15 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import {
-  Search,
-  Calendar,
-  FlaskConical,
-  Clock,
-  CheckCircle,
-  XCircle,
-  Eye,
-  MessageSquare,
-} from "lucide-react";
+  FiSearch,
+  FiCalendar,
+  FiXCircle,
+  FiEye,
+  FiMessageSquare,
+} from "react-icons/fi";
+import { FaFlask } from "react-icons/fa";
 import { useAuth } from "@/hooks/use-auth";
 import { api } from "@/lib/mock-api";
 import { Application } from "@/types/application";
@@ -90,7 +89,7 @@ export default function ApplicationsPage() {
   if (isLoading || !user) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <Spinner size="lg" />
       </div>
     );
   }
@@ -98,17 +97,17 @@ export default function ApplicationsPage() {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">My Applications</h1>
-        <p className="text-slate-500 mt-1">
+        <h1 className="text-2xl font-bold text-foreground">My Applications</h1>
+        <p className="text-muted-foreground mt-1">
           Track the status of your opportunity applications
         </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search
+          <FiSearch
             size={16}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
           />
           <Input
             placeholder="Search applications..."
@@ -122,7 +121,7 @@ export default function ApplicationsPage() {
             (status) => (
               <Button
                 key={status}
-                variant={statusFilter === status ? "primary" : "outline"}
+                variant={statusFilter === status ? "default" : "outline"}
                 size="sm"
                 onClick={() => setStatusFilter(status)}
               >
@@ -137,45 +136,45 @@ export default function ApplicationsPage() {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-slate-200">
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+              <tr className="border-b border-border">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Opportunity
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Type
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Applied
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Status
                 </th>
-                <th className="text-right text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-right text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-border">
               {filtered.map((app) => {
                 const type = getOppType(app.opportunityId);
                 return (
-                  <tr key={app.id} className="hover:bg-slate-50">
+                  <tr key={app.id} className="hover:bg-muted">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="p-2 bg-slate-100 rounded-lg">
+                        <div className="p-2 bg-muted rounded-lg">
                           {type === "EVENT" ? (
-                            <Calendar
+                            <FiCalendar
                               size={16}
-                              className="text-blue-600"
+                              className="text-brand-600"
                             />
                           ) : (
-                            <FlaskConical
+                            <FaFlask
                               size={16}
                               className="text-purple-600"
                             />
                           )}
                         </div>
-                        <p className="text-sm font-medium">
+                        <p className="text-sm font-medium text-foreground">
                           {getOppTitle(app.opportunityId)}
                         </p>
                       </div>
@@ -189,7 +188,7 @@ export default function ApplicationsPage() {
                         {type}
                       </Badge>
                     </td>
-                    <td className="px-6 py-4 text-sm text-slate-500">
+                    <td className="px-6 py-4 text-sm text-muted-foreground">
                       {new Date(app.appliedAt).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4">
@@ -201,7 +200,7 @@ export default function ApplicationsPage() {
                         size="sm"
                         onClick={() => setDetailModal(app)}
                       >
-                        <Eye size={14} />
+                        <FiEye size={14} />
                       </Button>
                     </td>
                   </tr>
@@ -211,7 +210,7 @@ export default function ApplicationsPage() {
                 <tr>
                   <td
                     colSpan={5}
-                    className="px-6 py-8 text-center text-slate-500"
+                    className="px-6 py-8 text-center text-muted-foreground"
                   >
                     No applications found
                   </td>
@@ -224,26 +223,26 @@ export default function ApplicationsPage() {
 
       {detailModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
+          <div className="bg-card rounded-xl shadow-xl w-full max-w-md mx-4 p-6 border border-border">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold">Application Details</h3>
+              <h3 className="text-lg font-semibold text-foreground">Application Details</h3>
               <button
                 onClick={() => setDetailModal(null)}
-                className="text-slate-400 hover:text-slate-600"
+                className="text-muted-foreground hover:text-foreground"
               >
-                <XCircle size={20} />
+                <FiXCircle size={20} />
               </button>
             </div>
             <div className="space-y-4">
               <div>
-                <p className="text-sm text-slate-500">Opportunity</p>
-                <p className="font-medium">
+                <p className="text-sm text-muted-foreground">Opportunity</p>
+                <p className="font-medium text-foreground">
                   {getOppTitle(detailModal.opportunityId)}
                 </p>
               </div>
               <div className="flex gap-4">
                 <div>
-                  <p className="text-sm text-slate-500">Type</p>
+                  <p className="text-sm text-muted-foreground">Type</p>
                   <Badge
                     variant={
                       detailModal.opportunityType === "EVENT"
@@ -255,28 +254,28 @@ export default function ApplicationsPage() {
                   </Badge>
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500">Status</p>
+                  <p className="text-sm text-muted-foreground">Status</p>
                   {statusBadge(detailModal.status)}
                 </div>
               </div>
               <div>
-                <p className="text-sm text-slate-500">Applied</p>
-                <p className="text-sm">
+                <p className="text-sm text-muted-foreground">Applied</p>
+                <p className="text-sm text-foreground">
                   {new Date(
                     detailModal.appliedAt
                   ).toLocaleDateString()}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-slate-500">Motivation</p>
-                <p className="text-sm">{detailModal.motivation}</p>
+                <p className="text-sm text-muted-foreground">Motivation</p>
+                <p className="text-sm text-foreground">{detailModal.motivation}</p>
               </div>
               {detailModal.feedback && (
                 <div>
-                  <p className="text-sm text-slate-500 flex items-center gap-1">
-                    <MessageSquare size={14} /> Feedback
+                  <p className="text-sm text-muted-foreground flex items-center gap-1">
+                    <FiMessageSquare size={14} /> Feedback
                   </p>
-                  <p className="text-sm bg-slate-50 p-3 rounded-lg">
+                  <p className="text-sm bg-muted p-3 rounded-lg text-foreground">
                     {detailModal.feedback}
                   </p>
                 </div>
