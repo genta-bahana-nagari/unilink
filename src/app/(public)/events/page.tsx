@@ -6,7 +6,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { Calendar, MapPin, Users } from "lucide-react";
+import { MapPin, Users } from "lucide-react";
+import Link from "next/link";
 
 export default function EventsPage() {
   const { events, isLoading, error } = useEvents();
@@ -53,7 +54,6 @@ export default function EventsPage() {
                       variant={
                         event.status === "PUBLISHED" ? "success" : "warning"
                       }
-                      className="mt-1"
                     >
                       {event.status}
                     </Badge>
@@ -70,9 +70,11 @@ export default function EventsPage() {
                     <Users size={14} /> {event.registeredCount}/{event.quota}
                   </span>
                 </div>
-                <Button asChild variant="outline" className="w-full">
-                  <a href={`/events/${event.id}`}>View Details</a>
-                </Button>
+                <Link href={`/events/${event.id}`}>
+                  <Button variant="outline" className="w-full">
+                    View Details
+                  </Button>
+                </Link>
               </div>
             </Card>
           ))}

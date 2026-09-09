@@ -6,7 +6,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { FlaskConical, User } from "lucide-react";
+import { User } from "lucide-react";
+import Link from "next/link";
 
 export default function ResearchPage() {
   const { research, isLoading, error } = useResearch();
@@ -53,7 +54,6 @@ export default function ResearchPage() {
                       variant={
                         r.status === "PUBLISHED" ? "success" : "warning"
                       }
-                      className="mt-1"
                     >
                       {r.status}
                     </Badge>
@@ -71,9 +71,11 @@ export default function ResearchPage() {
                     participants
                   </span>
                 </div>
-                <Button asChild variant="outline" className="w-full">
-                  <a href={`/research/${r.id}`}>View Details</a>
-                </Button>
+                <Link href={`/research/${r.id}`}>
+                  <Button variant="outline" className="w-full">
+                    View Details
+                  </Button>
+                </Link>
               </div>
             </Card>
           ))}
