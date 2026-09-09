@@ -9,6 +9,7 @@ import {
   ListChecks,
   Megaphone,
   Search,
+  Home,
 } from "lucide-react";
 
 export interface NavigationItem {
@@ -44,6 +45,7 @@ export const participantNavigation: NavigationItem[] = [
 ];
 
 export const publicNavigation: NavigationItem[] = [
+  { label: "Home", href: "/", icon: Home },
   { label: "Events", href: "/events", icon: Calendar },
   { label: "Research", href: "/research", icon: FlaskConical },
   { label: "Announcements", href: "/announcements", icon: Bell },
