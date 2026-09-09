@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
-import { ArrowLeft, CheckCircle, XCircle, Eye } from "lucide-react";
+import { FiArrowLeft, FiCheckCircle, FiXCircle, FiEye } from "react-icons/fi";
 import Link from "next/link";
 import { api } from "@/lib/mock-api";
 import { Application } from "@/types/application";
@@ -73,7 +73,7 @@ export default function EventApplicantsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <div className="animate-spin h-8 w-8 border-3 border-brand-600 rounded-full border-surface-300" />
       </div>
     );
   }
@@ -83,12 +83,12 @@ export default function EventApplicantsPage() {
       <div className="flex items-center gap-4">
         <Link href="/organizer/events">
           <Button variant="ghost" size="sm">
-            <ArrowLeft size={16} className="mr-1" /> Back
+            <FiArrowLeft size={16} className="mr-1" /> Back
           </Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold">Event Applicants</h1>
-          <p className="text-slate-500 mt-1">
+          <h1 className="text-2xl font-bold text-foreground">Event Applicants</h1>
+          <p className="text-muted-foreground mt-1">
             {event?.title || "Event"} &mdash; {applications.length} total
             applications
           </p>
@@ -99,46 +99,46 @@ export default function EventApplicantsPage() {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-slate-200">
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+              <tr className="border-b border-border">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Applicant
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Applied
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Motivation
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Status
                 </th>
-                <th className="text-right text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-right text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-border">
               {applications.map((app) => (
-                <tr key={app.id} className="hover:bg-slate-50">
+                <tr key={app.id} className="hover:bg-muted">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <Avatar
                         fallback={getUserName(app.applicantId)}
                       />
                       <div>
-                        <p className="text-sm font-medium">
+                        <p className="text-sm font-medium text-foreground">
                           {getUserName(app.applicantId)}
                         </p>
-                        <p className="text-xs text-slate-500">
+                        <p className="text-xs text-muted-foreground">
                           {getUserEmail(app.applicantId)}
                         </p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-slate-500">
+                  <td className="px-6 py-4 text-sm text-muted-foreground">
                     {new Date(app.appliedAt).toLocaleDateString()}
                   </td>
-                  <td className="px-6 py-4 text-sm text-slate-500 max-w-xs truncate">
+                  <td className="px-6 py-4 text-sm text-muted-foreground max-w-xs truncate">
                     {app.motivation}
                   </td>
                   <td className="px-6 py-4">{statusBadge(app.status)}</td>
@@ -152,9 +152,9 @@ export default function EventApplicantsPage() {
                             handleStatusUpdate(app.id, "ACCEPTED")
                           }
                         >
-                          <CheckCircle
+                          <FiCheckCircle
                             size={14}
-                            className="text-green-600"
+                            className="text-success"
                           />
                         </Button>
                         <Button
@@ -164,9 +164,9 @@ export default function EventApplicantsPage() {
                             handleStatusUpdate(app.id, "REJECTED")
                           }
                         >
-                          <XCircle
+                          <FiXCircle
                             size={14}
-                            className="text-red-600"
+                            className="text-danger"
                           />
                         </Button>
                       </div>
@@ -178,7 +178,7 @@ export default function EventApplicantsPage() {
                 <tr>
                   <td
                     colSpan={5}
-                    className="px-6 py-8 text-center text-slate-500"
+                    className="px-6 py-8 text-center text-muted-foreground"
                   >
                     No applications yet
                   </td>

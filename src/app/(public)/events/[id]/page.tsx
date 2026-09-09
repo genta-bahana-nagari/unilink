@@ -10,14 +10,14 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Spinner } from "@/components/ui/spinner";
 import {
-  Calendar,
-  MapPin,
-  Users,
-  Clock,
-  ArrowLeft,
-  Video,
-  ExternalLink,
-} from "lucide-react";
+  FiCalendar,
+  FiMapPin,
+  FiUsers,
+  FiClock,
+  FiArrowLeft,
+  FiVideo,
+  FiExternalLink,
+} from "react-icons/fi";
 
 export default function EventDetailPage() {
   const params = useParams();
@@ -73,7 +73,7 @@ export default function EventDetailPage() {
           href="/events"
           className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 mb-6"
         >
-          <ArrowLeft size={16} /> Back to Events
+          <FiArrowLeft size={16} /> Back to Events
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -93,14 +93,14 @@ export default function EventDetailPage() {
               <h2 className="text-xl font-semibold mb-4">Key Information</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex items-center gap-3">
-                  <MapPin size={18} className="text-slate-400" />
+                  <FiMapPin size={18} className="text-slate-400" />
                   <div>
                     <p className="text-xs text-slate-400">Location</p>
                     <p className="text-sm font-medium">{event.location}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Calendar size={18} className="text-slate-400" />
+                  <FiCalendar size={18} className="text-slate-400" />
                   <div>
                     <p className="text-xs text-slate-400">Start Date</p>
                     <p className="text-sm font-medium">
@@ -119,7 +119,7 @@ export default function EventDetailPage() {
                 </div>
                 {event.deadline && (
                   <div className="flex items-center gap-3">
-                    <Clock size={18} className="text-slate-400" />
+<FiClock size={18} className="text-slate-400" />
                     <div>
                       <p className="text-xs text-slate-400">Application Deadline</p>
                       <p className="text-sm font-medium">
@@ -130,7 +130,7 @@ export default function EventDetailPage() {
                 )}
                 {event.isOnline && (
                   <div className="flex items-center gap-3">
-                    <Video size={18} className="text-slate-400" />
+                    <FiVideo size={18} className="text-slate-400" />
                     <div>
                       <p className="text-xs text-slate-400">Format</p>
                       <p className="text-sm font-medium">Online Event</p>
@@ -178,7 +178,7 @@ export default function EventDetailPage() {
                   className="mt-3 w-full"
                 >
                   <Button variant="outline" className="w-full">
-                    <ExternalLink size={16} className="mr-2" />
+                    <FiExternalLink size={16} className="mr-2" />
                     Join Meeting
                   </Button>
                 </a>

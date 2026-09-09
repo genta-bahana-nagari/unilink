@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ApplicationStatus } from "./application-status";
 import { Avatar } from "@/components/ui/avatar";
-import { Calendar, MessageSquare } from "lucide-react";
+import { FiCalendar, FiMessageSquare } from "react-icons/fi";
 
 interface ApplicationTableProps {
   applications: Application[];
@@ -48,11 +48,11 @@ export function ApplicationTable({
                   Applied for: {app.opportunityId} ({app.opportunityType})
                 </p>
                 <div className="flex items-center gap-1 mt-2 text-xs text-slate-400">
-                  <Calendar size={12} /> {app.appliedAt}
+                  <FiCalendar size={12} /> {app.appliedAt}
                 </div>
                 {app.motivation && (
                   <div className="flex items-center gap-1 mt-1 text-xs text-slate-400">
-                    <MessageSquare size={12} />{" "}
+                    <FiMessageSquare size={12} />{" "}
                     {app.motivation.slice(0, 100)}...
                   </div>
                 )}

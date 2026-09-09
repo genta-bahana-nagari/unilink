@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { User } from "lucide-react";
+import { FiUser } from "react-icons/fi";
 import Link from "next/link";
 
 export default function ResearchPage() {
@@ -64,7 +64,7 @@ export default function ResearchPage() {
                 </p>
                 <div className="flex items-center gap-4 text-sm text-slate-400 mb-4">
                   <span className="flex items-center gap-1">
-                    <User size={14} /> {r.researcher}
+                    <FiUser size={14} /> {r.researcher}
                   </span>
                   <span>
                     {r.currentParticipants}/{r.requiredParticipants}

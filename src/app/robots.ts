@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin", "/organizer", "/participant", "/auth"],
       },
     ],
-    sitemap: "https://crowdlink-platform.com/sitemap.xml",
+    sitemap: "https://unilink-platform.com/sitemap.xml",
   };
 }

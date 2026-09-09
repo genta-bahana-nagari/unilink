@@ -6,22 +6,22 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  Users,
-  Target,
-  Award,
-  ArrowRight,
-  Calendar,
-  FlaskConical,
-  CheckCircle,
-  Star,
-  Zap,
-  Shield,
-  Globe,
-  ChevronRight,
-  TrendingUp,
-  Clock,
-  MapPin,
-} from "lucide-react";
+  FiUsers,
+  FiTarget,
+  FiAward,
+  FiArrowRight,
+  FiCalendar,
+  FiCheckCircle,
+  FiStar,
+  FiZap,
+  FiShield,
+  FiGlobe,
+  FiChevronRight,
+  FiTrendingUp,
+  FiClock,
+  FiMapPin,
+} from "react-icons/fi";
+import { FaFlask } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 
 export default function HomePage() {
@@ -32,36 +32,36 @@ export default function HomePage() {
   }, []);
 
   const stats = [
-    { label: "Active Projects", value: "500+", icon: Target },
-    { label: "Participants", value: "10,000+", icon: Users },
-    { label: "Organizations", value: "200+", icon: Globe },
-    { label: "Success Rate", value: "95%", icon: TrendingUp },
+    { label: "Active Projects", value: "500+", icon: FiTarget },
+    { label: "Participants", value: "10,000+", icon: FiUsers },
+    { label: "Organizations", value: "200+", icon: FiGlobe },
+    { label: "Success Rate", value: "95%", icon: FiTrendingUp },
   ];
 
   const features = [
     {
-      icon: Zap,
+      icon: FiZap,
       title: "Smart Matching",
       description:
         "Our algorithm matches participants with projects that fit their skills and interests.",
       color: "from-brand-500 to-brand-700",
     },
     {
-      icon: Shield,
+      icon: FiShield,
       title: "Trusted Platform",
       description:
         "Verified organizers and secure data handling ensure a safe environment for everyone.",
       color: "from-green-500 to-emerald-700",
     },
     {
-      icon: Users,
+      icon: FiUsers,
       title: "Collaborative Community",
       description:
         "Join a network of passionate researchers, organizers, and volunteers.",
       color: "from-purple-500 to-violet-700",
     },
     {
-      icon: Target,
+      icon: FiTarget,
       title: "Impactful Results",
       description:
         "Track your contributions and see the real-world impact of your participation.",
@@ -74,19 +74,20 @@ export default function HomePage() {
       number: "01",
       title: "Create Profile",
       description: "Sign up and tell us about your skills and interests.",
-      icon: Users,
+      icon: FiUsers,
     },
     {
       number: "02",
       title: "Find Projects",
-      description: "Browse opportunities or receive personalized recommendations.",
-      icon: Target,
+      description:
+        "Browse opportunities or receive personalized recommendations.",
+      icon: FiTarget,
     },
     {
       number: "03",
       title: "Apply & Contribute",
       description: "Submit applications and start making an impact today.",
-      icon: Award,
+      icon: FiAward,
     },
   ];
 
@@ -95,7 +96,7 @@ export default function HomePage() {
       name: "Dr. Sarah Chen",
       role: "Research Lead, Stanford University",
       content:
-        "CrowdLink helped us recruit 200 participants for our climate study in just two weeks. The quality of volunteers was exceptional.",
+        "UniLink helped us recruit 200 participants for our climate study in just two weeks. The quality of volunteers was exceptional.",
       rating: 5,
     },
     {
@@ -130,10 +131,8 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
-            <Badge
-              className="mb-6 px-4 py-2 bg-brand-500/20 text-brand-100 border border-brand-400/30"
-            >
-              <Zap className="w-4 h-4 mr-2" />
+            <Badge className="mb-6 px-4 py-2 bg-brand-500/20 text-brand-100 border border-brand-400/30">
+              <FiZap className="w-4 h-4 mr-2" />
               Empowering Collaborative Research
             </Badge>
 
@@ -144,7 +143,7 @@ export default function HomePage() {
                 "transition-all duration-700 transform",
                 isVisible
                   ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
+                  : "translate-y-10 opacity-0",
               )}
             >
               Where Ideas Meet
@@ -161,10 +160,10 @@ export default function HomePage() {
                 "transition-all duration-700 delay-100 transform",
                 isVisible
                   ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
+                  : "translate-y-10 opacity-0",
               )}
             >
-              CrowdLink connects organizations with skilled participants for
+              UniLink connects organizations with skilled participants for
               research studies, events, and impactful collaborations. Join
               thousands making a difference.
             </p>
@@ -176,7 +175,7 @@ export default function HomePage() {
                 "transition-all duration-700 delay-200 transform",
                 isVisible
                   ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
+                  : "translate-y-10 opacity-0",
               )}
             >
               <Link href="/auth/register">
@@ -185,7 +184,7 @@ export default function HomePage() {
                   className="bg-white text-brand-700 hover:bg-brand-50 shadow-lg shadow-brand-500/30 hover:shadow-xl hover:shadow-brand-500/40 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
                 >
                   Get Started Free
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <FiArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/events">
@@ -206,7 +205,7 @@ export default function HomePage() {
                 "transition-all duration-700 delay-300 transform",
                 isVisible
                   ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
+                  : "translate-y-10 opacity-0",
               )}
             >
               {stats.map((stat, index) => (
@@ -248,7 +247,7 @@ export default function HomePage() {
                 <div
                   className={cn(
                     "w-12 h-12 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4 group-hover:scale-110 transition-transform",
-                    feature.color
+                    feature.color,
                   )}
                 >
                   <feature.icon className="w-6 h-6 text-white" />
@@ -319,7 +318,7 @@ export default function HomePage() {
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               See what our community has to say about their experience with
-              CrowdLink.
+              UniLink.
             </p>
           </div>
 
@@ -332,7 +331,7 @@ export default function HomePage() {
                 {/* Rating */}
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
+                    <FiStar
                       key={i}
                       className="w-5 h-5 text-yellow-400 fill-yellow-400"
                     />
@@ -381,7 +380,7 @@ export default function HomePage() {
                 className="bg-white text-brand-700 hover:bg-brand-50 shadow-lg shadow-brand-500/30 w-full sm:w-auto"
               >
                 Start Your Journey
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <FiArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link href="/events">

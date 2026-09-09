@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon } from "react-icons/fi";
 
 interface StatCardProps {
   title: string;
@@ -19,22 +19,22 @@ export function StatCard({
   trendValue,
 }: StatCardProps) {
   return (
-    <Card className="p-6">
+    <Card className="p-6 border-border">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-medium text-slate-500">{title}</p>
-          <p className="text-3xl font-bold mt-1">{value}</p>
+          <p className="text-sm font-medium text-muted-foreground">{title}</p>
+          <p className="text-3xl font-bold mt-1 text-foreground">{value}</p>
           {description && (
-            <p className="text-sm text-slate-500 mt-1">{description}</p>
+            <p className="text-sm text-muted-foreground mt-1">{description}</p>
           )}
           {trend && trendValue && (
             <p
               className={`text-sm mt-2 font-medium ${
                 trend === "up"
-                  ? "text-green-600"
+                  ? "text-success"
                   : trend === "down"
-                  ? "text-red-600"
-                  : "text-slate-500"
+                  ? "text-danger"
+                  : "text-muted-foreground"
               }`}
             >
               {trend === "up" ? "+" : trend === "down" ? "-" : ""}
@@ -42,8 +42,8 @@ export function StatCard({
             </p>
           )}
         </div>
-        <div className="p-3 bg-blue-50 rounded-lg">
-          <Icon size={24} className="text-blue-600" />
+        <div className="p-3 bg-brand-50 rounded-lg">
+          <Icon size={24} className="text-brand-600" />
         </div>
       </div>
     </Card>

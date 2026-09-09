@@ -1,12 +1,13 @@
-# CrowdLink - Crowdsourcing Platform
+# UniLink - Crowdsourcing Platform
 
 > **Connect. Collaborate. Create Impact.**
 
-CrowdLink is a modern, professional crowdsourcing platform built with Next.js 16, React 19, and Tailwind CSS 4. It connects organizations, researchers, and skilled participants for research studies, events, and impactful collaborations.
+UniLink is a modern, professional crowdsourcing platform built with Next.js 16, React 19, and Tailwind CSS 4. It connects organizations, researchers, and skilled participants for research studies, events, and impactful collaborations.
 
 ## Features
 
 ### For Researchers & Organizations
+
 - **Smart Project Management** - Create and manage research studies and events
 - **Participant Matching** - Find qualified participants with the right skills
 - **Real-time Analytics** - Track engagement, applications, and success metrics
@@ -14,6 +15,7 @@ CrowdLink is a modern, professional crowdsourcing platform built with Next.js 16
 - **Approval Workflows** - Manage submissions with built-in review processes
 
 ### For Participants
+
 - **Discover Opportunities** - Browse hundreds of research studies and events
 - **Personalized Recommendations** - Get matched based on your skills and interests
 - **Application Tracking** - Monitor your applications in one dashboard
@@ -21,6 +23,7 @@ CrowdLink is a modern, professional crowdsourcing platform built with Next.js 16
 - **Community Access** - Connect with researchers and fellow participants
 
 ### Platform Features
+
 - **Responsive Design** - Works seamlessly on desktop, tablet, and mobile
 - **Dark Mode Support** - Easy on the eyes for extended use
 - **SEO Optimized** - Built-in metadata, sitemaps, and structured data
@@ -29,14 +32,14 @@ CrowdLink is a modern, professional crowdsourcing platform built with Next.js 16
 
 ## Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript 5 |
-| UI Library | React 19 |
-| Styling | Tailwind CSS 4 |
-| Icons | Lucide React |
-| Package Manager | pnpm |
+| Category        | Technology              |
+| --------------- | ----------------------- |
+| Framework       | Next.js 16 (App Router) |
+| Language        | TypeScript 5            |
+| UI Library      | React 19                |
+| Styling         | Tailwind CSS 4          |
+| Icons           | Lucide React            |
+| Package Manager | pnpm                    |
 
 ## Getting Started
 
@@ -49,10 +52,10 @@ CrowdLink is a modern, professional crowdsourcing platform built with Next.js 16
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/crowdlink.git
+git clone https://github.com/your-org/unilink.git
 
 # Navigate to project directory
-cd crowdlink
+cd unilink
 
 # Install dependencies
 pnpm install
@@ -65,17 +68,17 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ### Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Build for production |
-| `pnpm start` | Start production server |
-| `pnpm lint` | Run ESLint |
+| Command      | Description              |
+| ------------ | ------------------------ |
+| `pnpm dev`   | Start development server |
+| `pnpm build` | Build for production     |
+| `pnpm start` | Start production server  |
+| `pnpm lint`  | Run ESLint               |
 
 ## Project Structure
 
 ```
-crowdlink/
+unilink/
 ├── public/                 # Static assets
 │   └── images/
 │       ├── events/
@@ -124,6 +127,7 @@ The platform uses a professional color palette designed for trust and clarity:
 ### Components
 
 All UI components follow these principles:
+
 - Accessible by default (WCAG 2.1)
 - Keyboard navigable
 - Screen reader friendly
@@ -133,18 +137,21 @@ All UI components follow these principles:
 ## User Roles
 
 ### Administrator
+
 - Manage users and organizers
 - Approve/reject submissions
 - Monitor platform activity
 - Configure platform settings
 
 ### Organizer
+
 - Create and manage events/research
 - Review applications
 - Track participant engagement
 - Manage announcements
 
 ### Participant
+
 - Browse opportunities
 - Submit applications
 - Track application status
@@ -205,10 +212,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- **Documentation**: [docs.crowdlink.com](https://docs.crowdlink.com)
-- **Issues**: [GitHub Issues](https://github.com/your-org/crowdlink/issues)
-- **Email**: support@crowdlink.com
-- **Discord**: [Join our community](https://discord.gg/crowdlink)
+- **Documentation**: [docs.unilink.com](https://docs.unilink.com)
+- **Issues**: [GitHub Issues](https://github.com/your-org/unilink/issues)
+- **Email**: support@unilink.com
+- **Discord**: [Join our community](https://discord.gg/unilink)
 
 ---
 

@@ -14,15 +14,25 @@ export function DashboardSidebar({ items, role }: DashboardSidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-white border-r border-slate-200 h-screen sticky top-0 overflow-y-auto flex-shrink-0 hidden md:block">
-      <div className="p-6 border-b border-slate-200">
-        <h1 className="text-xl font-bold text-blue-600">UniLink</h1>
-        <p className="text-sm text-slate-500 capitalize mt-1">{role}</p>
+    <aside className="w-64 bg-card border-r border-border h-screen sticky top-0 overflow-y-auto flex-shrink-0 hidden md:block">
+      <div className="p-6 border-b border-border">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-md shadow-brand-200">
+            <span className="text-white font-bold text-lg">C</span>
+          </div>
+          <div>
+            <h1 className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text text-transparent">
+              UniLink
+            </h1>
+            <p className="text-sm text-muted-foreground capitalize">{role}</p>
+          </div>
+        </div>
       </div>
 
       <nav className="p-4 space-y-1">
-        {items.map(item => {
-          const isActive = pathname === item.href ||
+        {items.map((item) => {
+          const isActive =
+            pathname === item.href ||
             (pathname.startsWith(item.href + "/") && !item.exact);
 
           return (
@@ -32,8 +42,8 @@ export function DashboardSidebar({ items, role }: DashboardSidebarProps) {
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors",
                 isActive
-                  ? "bg-blue-50 text-blue-600 font-medium"
-                  : "text-slate-700 hover:bg-slate-50"
+                  ? "bg-brand-50 text-brand-600 font-medium"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
               )}
             >
               <item.icon size={18} className="flex-shrink-0" />

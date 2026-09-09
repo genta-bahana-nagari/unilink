@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect } from "react";
-import { X } from "lucide-react";
+import { FiX } from "react-icons/fi";
 import { cn } from "@/lib/utils";
 
 interface ModalProps {
@@ -63,7 +63,7 @@ export function Modal({
       >
         <div
           className={cn(
-            "bg-white rounded-xl w-full max-h-[90vh] overflow-y-auto shadow-xl transform transition-all",
+            "bg-card rounded-xl w-full max-h-[90vh] overflow-y-auto shadow-xl transform transition-all border border-border",
             sizes[size]
           )}
           onClick={(e) => e.stopPropagation()}
@@ -81,7 +81,7 @@ export function Modal({
                 className="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
                 aria-label="Close modal"
               >
-                <X size={20} />
+                <FiX size={20} />
               </button>
             </div>
           )}

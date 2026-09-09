@@ -10,13 +10,13 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Spinner } from "@/components/ui/spinner";
 import {
-  User,
-  Clock,
-  ArrowLeft,
-  Users,
-  DollarSign,
-  CheckCircle,
-} from "lucide-react";
+  FiUser,
+  FiClock,
+  FiArrowLeft,
+  FiUsers,
+  FiDollarSign,
+  FiCheckCircle,
+} from "react-icons/fi";
 
 export default function ResearchDetailPage() {
   const params = useParams();
@@ -72,7 +72,7 @@ export default function ResearchDetailPage() {
           href="/research"
           className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 mb-6"
         >
-          <ArrowLeft size={16} /> Back to Research
+          <FiArrowLeft size={16} /> Back to Research
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -96,7 +96,7 @@ export default function ResearchDetailPage() {
               <h2 className="text-xl font-semibold mb-4">Research Details</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div className="flex items-center gap-3">
-                  <User size={18} className="text-slate-400" />
+                  <FiUser size={18} className="text-slate-400" />
                   <div>
                     <p className="text-xs text-slate-400">Lead Researcher</p>
                     <p className="text-sm font-medium">{research.researcher}</p>
@@ -104,7 +104,7 @@ export default function ResearchDetailPage() {
                 </div>
                 {research.duration && (
                   <div className="flex items-center gap-3">
-                    <Clock size={18} className="text-slate-400" />
+                    <FiClock size={18} className="text-slate-400" />
                     <div>
                       <p className="text-xs text-slate-400">Duration</p>
                       <p className="text-sm font-medium">{research.duration}</p>
@@ -113,7 +113,7 @@ export default function ResearchDetailPage() {
                 )}
                 {research.deadline && (
                   <div className="flex items-center gap-3">
-                    <Clock size={18} className="text-slate-400" />
+                    <FiClock size={18} className="text-slate-400" />
                     <div>
                       <p className="text-xs text-slate-400">Application Deadline</p>
                       <p className="text-sm font-medium">
@@ -124,7 +124,7 @@ export default function ResearchDetailPage() {
                 )}
                 {research.compensation && (
                   <div className="flex items-center gap-3">
-                    <DollarSign size={18} className="text-slate-400" />
+                    <FiDollarSign size={18} className="text-slate-400" />
                     <div>
                       <p className="text-xs text-slate-400">Compensation</p>
                       <p className="text-sm font-medium">
@@ -142,7 +142,7 @@ export default function ResearchDetailPage() {
                 <ul className="space-y-3">
                   {research.criteria.map((criterion, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <CheckCircle size={18} className="text-green-500 mt-0.5 flex-shrink-0" />
+                      <FiCheckCircle size={18} className="text-success mt-0.5 flex-shrink-0" />
                       <span className="text-sm text-slate-600">{criterion}</span>
                     </li>
                   ))}

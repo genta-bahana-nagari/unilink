@@ -19,11 +19,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "CrowdLink - Crowdsourcing Platform",
-    template: "%s | CrowdLink",
+    default: "UniLink - Crowdsourcing Platform",
+    template: "%s | UniLink",
   },
   description:
-    "CrowdLink connects organizations and researchers with skilled participants for events, research studies, and collaborative projects. Discover opportunities, apply, and make an impact.",
+    "UniLink connects organizations and researchers with skilled participants for events, research studies, and collaborative projects. Discover opportunities, apply, and make an impact.",
   keywords: [
     "crowdsourcing",
     "research",
@@ -33,19 +33,19 @@ export const metadata: Metadata = {
     "collaboration",
     "crowd-sourcing",
   ],
-  authors: [{ name: "CrowdLink Team" }],
-  creator: "CrowdLink",
-  publisher: "CrowdLink",
-  metadataBase: new URL("https://crowdlink-platform.com"),
+  authors: [{ name: "UniLink Team" }],
+  creator: "UniLink",
+  publisher: "UniLink",
+  metadataBase: new URL("https://unilink-platform.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "CrowdLink - Crowdsourcing Platform",
+    title: "UniLink - Crowdsourcing Platform",
     description:
       "Connect with events, research, and collaboration opportunities tailored to your skills.",
-    url: "https://crowdlink-platform.com",
-    siteName: "CrowdLink",
+    url: "https://unilink-platform.com",
+    siteName: "UniLink",
     locale: "en_US",
     type: "website",
     images: [
@@ -53,17 +53,17 @@ export const metadata: Metadata = {
         url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "CrowdLink - Crowdsourcing Platform",
+        alt: "UniLink - Crowdsourcing Platform",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CrowdLink - Crowdsourcing Platform",
+    title: "UniLink - Crowdsourcing Platform",
     description:
       "Connect with events, research, and collaboration opportunities tailored to your skills.",
-    creator: "@crowdlink",
-    site: "@crowdlink",
+    creator: "@unilink",
+    site: "@unilink",
   },
   robots: {
     index: true,
@@ -92,7 +92,7 @@ export default function RootLayout({
       className={cn(
         geistSans.variable,
         geistMono.variable,
-        "h-full scroll-smooth antialiased"
+        "h-full scroll-smooth antialiased",
       )}
       suppressHydrationWarning
     >

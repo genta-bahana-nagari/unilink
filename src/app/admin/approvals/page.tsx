@@ -6,13 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import {
-  Calendar,
-  FlaskConical,
-  CheckCircle,
-  XCircle,
-  Clock,
-  ArrowRight,
-} from "lucide-react";
+  FiCalendar,
+  FiCheckCircle,
+  FiXCircle,
+  FiClock,
+  FiArrowRight,
+} from "react-icons/fi";
+import { FaFlask } from "react-icons/fa";
 import { api } from "@/lib/mock-api";
 import { Event } from "@/types/event";
 import { Research } from "@/types/research";
@@ -101,7 +101,7 @@ export default function AdminApprovalsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <div className="animate-spin h-8 w-8 border-3 border-brand-600 rounded-full border-surface-300" />
       </div>
     );
   }
@@ -109,26 +109,26 @@ export default function AdminApprovalsPage() {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Approvals</h1>
-        <p className="text-slate-500 mt-1">
+        <h1 className="text-2xl font-bold text-foreground">Approvals</h1>
+        <p className="text-muted-foreground mt-1">
           Review and approve pending submissions
         </p>
       </div>
 
-      <Card className="p-6">
+      <Card className="p-6 border-border">
         <div className="flex items-center gap-2 mb-4">
-          <Clock size={20} className="text-amber-600" />
-          <h2 className="text-lg font-semibold">
+          <FiClock size={20} className="text-warning" />
+          <h2 className="text-lg font-semibold text-foreground">
             Pending Opportunity Approvals ({pendingItems.length})
           </h2>
         </div>
         {pendingItems.length === 0 ? (
           <div className="text-center py-8">
-            <CheckCircle
+            <FiCheckCircle
               size={48}
-              className="mx-auto text-green-500 mb-3"
+              className="mx-auto text-success mb-3"
             />
-            <p className="text-slate-500">
+            <p className="text-muted-foreground">
               All caught up! No pending approvals.
             </p>
           </div>
@@ -137,22 +137,22 @@ export default function AdminApprovalsPage() {
             {pendingItems.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-100"
+                className="flex items-center justify-between p-4 bg-muted rounded-lg border border-border"
               >
                 <div className="flex items-center gap-4">
-                  <div className="p-2 bg-white rounded-lg border border-slate-200">
+                  <div className="p-2 bg-card rounded-lg border border-border">
                     {item.type === "EVENT" ? (
-                      <Calendar size={20} className="text-blue-600" />
+                      <FiCalendar size={20} className="text-brand-600" />
                     ) : (
-                      <FlaskConical
+                      <FaFlask
                         size={20}
                         className="text-purple-600"
                       />
                     )}
                   </div>
                   <div>
-                    <p className="font-medium">{item.title}</p>
-                    <p className="text-sm text-slate-500">
+                    <p className="font-medium text-foreground">{item.title}</p>
+                    <p className="text-sm text-muted-foreground">
                       {item.type} &middot; by{" "}
                       {getOrganizerName(item.organizerId)} &middot;{" "}
                       {new Date(item.createdAt).toLocaleDateString()}
@@ -161,18 +161,18 @@ export default function AdminApprovalsPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
-                    variant="danger"
+                    variant="destructive"
                     size="sm"
                     onClick={() => handleReject(item.id, item.type)}
                   >
-                    <XCircle size={14} className="mr-1" /> Reject
+                    <FiXCircle size={14} className="mr-1" /> Reject
                   </Button>
                   <Button
-                    variant="primary"
+                    variant="default"
                     size="sm"
                     onClick={() => handleApprove(item.id, item.type)}
                   >
-                    <CheckCircle size={14} className="mr-1" /> Approve
+                    <FiCheckCircle size={14} className="mr-1" /> Approve
                   </Button>
                 </div>
               </div>
@@ -181,54 +181,54 @@ export default function AdminApprovalsPage() {
         )}
       </Card>
 
-      <Card className="p-6">
+      <Card className="p-6 border-border">
         <div className="flex items-center gap-2 mb-4">
-          <ArrowRight size={20} className="text-blue-600" />
-          <h2 className="text-lg font-semibold">
+          <FiArrowRight size={20} className="text-brand-600" />
+          <h2 className="text-lg font-semibold text-foreground">
             Pending Applications ({pendingApps.length})
           </h2>
         </div>
         {pendingApps.length === 0 ? (
-          <p className="text-slate-500 text-center py-8">
+          <p className="text-muted-foreground text-center py-8">
             No pending applications
           </p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-slate-200">
-                  <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">
+                <tr className="border-b border-border">
+                  <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-4 py-3">
                     Applicant
                   </th>
-                  <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">
+                  <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-4 py-3">
                     Opportunity
                   </th>
-                  <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">
+                  <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-4 py-3">
                     Type
                   </th>
-                  <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">
+                  <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-4 py-3">
                     Applied
                   </th>
-                  <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-4 py-3">
+                  <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-4 py-3">
                     Motivation
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-border">
                 {pendingApps.map((app) => (
-                  <tr key={app.id} className="hover:bg-slate-50">
+                  <tr key={app.id} className="hover:bg-muted">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         <Avatar
                           fallback={getApplicantName(app.applicantId)}
                           size="sm"
                         />
-                        <span className="text-sm font-medium">
+                        <span className="text-sm font-medium text-foreground">
                           {getApplicantName(app.applicantId)}
                         </span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-sm">
+                    <td className="px-4 py-3 text-sm text-muted-foreground">
                       {app.opportunityId}
                     </td>
                     <td className="px-4 py-3">
@@ -242,10 +242,10 @@ export default function AdminApprovalsPage() {
                         {app.opportunityType}
                       </Badge>
                     </td>
-                    <td className="px-4 py-3 text-sm text-slate-500">
+                    <td className="px-4 py-3 text-sm text-muted-foreground">
                       {new Date(app.appliedAt).toLocaleDateString()}
                     </td>
-                    <td className="px-4 py-3 text-sm text-slate-500 max-w-xs truncate">
+                    <td className="px-4 py-3 text-sm text-muted-foreground max-w-xs truncate">
                       {app.motivation}
                     </td>
                   </tr>

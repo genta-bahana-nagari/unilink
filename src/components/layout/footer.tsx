@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import {
-  Mail,
-  Twitter,
-  Github,
-  Linkedin,
-  MapPin,
-  Phone,
-  Clock,
-} from "lucide-react";
+  FiMail,
+  FiTwitter,
+  FiGithub,
+  FiLinkedin,
+  FiMapPin,
+  FiPhone,
+  FiClock,
+} from "react-icons/fi";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -24,7 +24,7 @@ export function Footer() {
                 <span className="text-white font-bold text-lg">C</span>
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text text-transparent">
-                CrowdLink
+                UniLink
               </span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -36,28 +36,28 @@ export function Footer() {
                 className="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-brand-600"
                 aria-label="Twitter"
               >
-                <Twitter size={18} />
+                <FiTwitter size={18} />
               </Link>
               <Link
                 href={siteConfig.links.github}
                 className="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-brand-600"
                 aria-label="GitHub"
               >
-                <Github size={18} />
+                <FiGithub size={18} />
               </Link>
               <Link
                 href={siteConfig.links.linkedin}
                 className="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-brand-600"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={18} />
+                <FiLinkedin size={18} />
               </Link>
               <Link
                 href={`mailto:${siteConfig.contact.email}`}
                 className="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground hover:text-brand-600"
                 aria-label="Email"
               >
-                <Mail size={18} />
+                <FiMail size={18} />
               </Link>
             </div>
           </div>
@@ -137,15 +137,15 @@ export function Footer() {
             </h4>
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Mail size={16} />
+                <FiMail size={16} />
                 <span>{siteConfig.contact.email}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Phone size={16} />
+                <FiPhone size={16} />
                 <span>+1 (555) 000-0000</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock size={16} />
+                <FiClock size={16} />
                 <span>Mon–Fri, 9AM–6PM UTC</span>
               </div>
             </div>
@@ -170,7 +170,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} CrowdLink. All rights reserved.
+              © {currentYear} UniLink. All rights reserved.
             </p>
             <p className="text-sm text-muted-foreground">
               Built for crowds that matter.

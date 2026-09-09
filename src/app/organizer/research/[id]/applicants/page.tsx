@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
-import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
+import { FiArrowLeft, FiCheckCircle, FiXCircle } from "react-icons/fi";
 import Link from "next/link";
 import { api } from "@/lib/mock-api";
 import { Application } from "@/types/application";
@@ -83,7 +83,7 @@ export default function ResearchApplicantsPage() {
       <div className="flex items-center gap-4">
         <Link href="/organizer/research">
           <Button variant="ghost" size="sm">
-            <ArrowLeft size={16} className="mr-1" /> Back
+            <FiArrowLeft size={16} className="mr-1" /> Back
           </Button>
         </Link>
         <div>
@@ -152,10 +152,10 @@ export default function ResearchApplicantsPage() {
                             handleStatusUpdate(app.id, "ACCEPTED")
                           }
                         >
-                          <CheckCircle
-                            size={14}
-                            className="text-green-600"
-                          />
+<FiCheckCircle
+  size={14}
+  className="text-success"
+/>
                         </Button>
                         <Button
                           variant="ghost"
@@ -164,10 +164,10 @@ export default function ResearchApplicantsPage() {
                             handleStatusUpdate(app.id, "REJECTED")
                           }
                         >
-                          <XCircle
-                            size={14}
-                            className="text-red-600"
-                          />
+<FiXCircle
+  size={14}
+  className="text-danger"
+/>
                         </Button>
                       </div>
                     )}

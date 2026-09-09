@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
-import { ArrowLeft, Save, Plus, X } from "lucide-react";
+import { FiArrowLeft, FiSave, FiPlus, FiX } from "react-icons/fi";
 import Link from "next/link";
 import { useAuth } from "@/hooks/use-auth";
 import { api } from "@/lib/mock-api";
@@ -117,7 +117,7 @@ export default function CreateResearchPage() {
       <div className="flex items-center gap-4">
         <Link href="/organizer/research">
           <Button variant="ghost" size="sm">
-            <ArrowLeft size={16} className="mr-1" /> Back
+            <FiArrowLeft size={16} className="mr-1" /> Back
           </Button>
         </Link>
         <div>
@@ -239,7 +239,7 @@ export default function CreateResearchPage() {
                 variant="outline"
                 onClick={addCriterion}
               >
-                <Plus size={16} />
+                <FiPlus size={16} />
               </Button>
             </div>
             {form.criteria.length > 0 && (
@@ -255,7 +255,7 @@ export default function CreateResearchPage() {
                       onClick={() => removeCriterion(i)}
                       className="text-slate-400 hover:text-red-500"
                     >
-                      <X size={14} />
+                      <FiX size={14} />
                     </button>
                   </div>
                 ))}
@@ -274,7 +274,7 @@ export default function CreateResearchPage() {
               </Button>
             </Link>
             <Button type="submit" disabled={isSubmitting}>
-              <Save size={16} className="mr-2" />
+              <FiSave size={16} className="mr-2" />
               {isSubmitting ? "Creating..." : "Create Research"}
             </Button>
           </div>

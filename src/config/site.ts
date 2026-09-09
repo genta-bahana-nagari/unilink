@@ -1,23 +1,23 @@
 export const siteConfig = {
-  name: "CrowdLink",
+  name: "UniLink",
   description:
     "Crowdsourcing platform connecting organizations, researchers, and participants for impactful collaborations.",
-  url: "https://crowdlink-platform.com",
-  ogImage: "https://crowdlink-platform.com/images/og-image.jpg",
+  url: "https://unilink-platform.com",
+  ogImage: "https://unilink-platform.com/images/og-image.jpg",
   logo: {
     light: "/images/logo-light.svg",
     dark: "/images/logo-dark.svg",
   },
   contact: {
-    email: "hello@crowdlink.com",
-    twitter: "@crowdlink",
-    github: "https://github.com/crowdlink",
+    email: "hello@unilink.com",
+    twitter: "@unilink",
+    github: "https://github.com/unilink",
   },
   links: {
-    twitter: "https://twitter.com/crowdlink",
-    github: "https://github.com/crowdlink",
-    linkedin: "https://linkedin.com/company/crowdlink",
-    discord: "https://discord.gg/crowdlink",
+    twitter: "https://twitter.com/unilink",
+    github: "https://github.com/unilink",
+    linkedin: "https://linkedin.com/company/unilink",
+    discord: "https://discord.gg/unilink",
   },
   navigation: [
     { label: "Events", href: "/events" },

@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Users, Clock, DollarSign } from "lucide-react";
+import { FiSearch, FiUsers, FiClock, FiDollarSign } from "react-icons/fi";
 import { api } from "@/lib/mock-api";
 import { Research } from "@/types/research";
 
@@ -50,7 +50,7 @@ export default function AdminResearchPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <div className="animate-spin h-8 w-8 border-3 border-brand-600 rounded-full border-surface-300" />
       </div>
     );
   }
@@ -58,17 +58,17 @@ export default function AdminResearchPage() {
   return (
     <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Research Studies</h1>
-        <p className="text-slate-500 mt-1">
+        <h1 className="text-2xl font-bold text-foreground">Research Studies</h1>
+        <p className="text-muted-foreground mt-1">
           Manage all research studies on the platform
         </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search
+          <FiSearch
             size={16}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
           />
           <Input
             placeholder="Search research..."
@@ -82,7 +82,7 @@ export default function AdminResearchPage() {
             (status) => (
               <Button
                 key={status}
-                variant={statusFilter === status ? "primary" : "outline"}
+                variant={statusFilter === status ? "default" : "outline"}
                 size="sm"
                 onClick={() => setStatusFilter(status)}
               >
@@ -97,55 +97,55 @@ export default function AdminResearchPage() {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-slate-200">
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+              <tr className="border-b border-border">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Study
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Researcher
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Participants
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Duration
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Compensation
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider px-6 py-3">
+                <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-6 py-3">
                   Status
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-border">
               {filtered.map((item) => (
-                <tr key={item.id} className="hover:bg-slate-50">
+                <tr key={item.id} className="hover:bg-muted">
                   <td className="px-6 py-4">
-                    <p className="text-sm font-medium">{item.title}</p>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-sm font-medium text-foreground">{item.title}</p>
+                    <p className="text-xs text-muted-foreground">
                       {item.category}
                     </p>
                   </td>
-                  <td className="px-6 py-4 text-sm text-slate-600">
+                  <td className="px-6 py-4 text-sm text-muted-foreground">
                     {item.researcher}
                   </td>
                   <td className="px-6 py-4">
-                    <span className="flex items-center gap-1 text-sm text-slate-600">
-                      <Users size={14} />
+                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <FiUsers size={14} />
                       {item.currentParticipants}/
                       {item.requiredParticipants}
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="flex items-center gap-1 text-sm text-slate-600">
-                      <Clock size={14} />
+                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <FiClock size={14} />
                       {item.duration || "N/A"}
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="flex items-center gap-1 text-sm text-slate-600">
-                      <DollarSign size={14} />
+                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <FiDollarSign size={14} />
                       {item.compensation || "N/A"}
                     </span>
                   </td>
@@ -158,7 +158,7 @@ export default function AdminResearchPage() {
                 <tr>
                   <td
                     colSpan={6}
-                    className="px-6 py-8 text-center text-slate-500"
+                    className="px-6 py-8 text-center text-muted-foreground"
                   >
                     No research studies found
                   </td>

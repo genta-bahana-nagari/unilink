@@ -10,20 +10,21 @@ import { Avatar } from "@/components/ui/avatar";
 import { useEvents } from "@/hooks/use-events";
 import { useResearch } from "@/hooks/use-research";
 import {
-  Calendar,
-  FlaskConical,
-  ArrowRight,
-  TrendingUp,
-  Users,
-  Clock,
-  Sparkles,
-  Target,
-  Award,
-  ChevronRight,
-  Star,
-  MapPin,
-  Briefcase,
-} from "lucide-react";
+  FiCalendar,
+  FiFlask,
+  FiArrowRight,
+  FiTrendingUp,
+  FiUsers,
+  FiClock,
+  FiStar,
+  FiTarget,
+  FiAward,
+  FiChevronRight,
+  FiMapPin,
+  FiBriefcase,
+  FiZap,
+} from "react-icons/fi";
+import { FaFlask } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 
 export default function HomePage() {
@@ -40,10 +41,10 @@ export default function HomePage() {
 
   // Stats data
   const stats = [
-    { label: "Active Events", value: "127+", icon: Calendar },
-    { label: "Research Studies", value: "84+", icon: FlaskConical },
-    { label: "Volunteers", value: "2.4K+", icon: Users },
-    { label: "Success Rate", value: "94%", icon: TrendingUp },
+    { label: "Active Events", value: "127+", icon: FiCalendar },
+    { label: "Research Studies", value: "84+", icon: FaFlask },
+    { label: "Volunteers", value: "2.4K+", icon: FiUsers },
+    { label: "Success Rate", value: "94%", icon: FiTrendingUp },
   ];
 
   // How it works steps
@@ -53,21 +54,21 @@ export default function HomePage() {
       title: "Create Your Profile",
       description:
         "Sign up as an organizer or volunteer. Customize your profile to showcase your expertise and interests.",
-      icon: Users,
+      icon: FiUsers,
     },
     {
       number: "02",
       title: "Discover Opportunities",
       description:
         "Browse through events and research studies that match your skills. Use filters to find the perfect fit.",
-      icon: Target,
+      icon: FiTarget,
     },
     {
       number: "03",
       title: "Apply & Collaborate",
       description:
         "Submit applications, track your status, and connect with organizers. Start making an impact today.",
-      icon: Award,
+      icon: FiAward,
     },
   ];
 
@@ -93,7 +94,7 @@ export default function HomePage() {
             <div className="space-y-8">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
-                <Sparkles className="w-4 h-4" />
+                <FiZap className="w-4 h-4" />
                 <span>Empowering Collaboration</span>
               </div>
 
@@ -143,7 +144,7 @@ export default function HomePage() {
                     className="bg-white text-blue-600 hover:bg-slate-100 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 transform hover:scale-105"
                   >
                     Explore Events
-                    <ArrowRight className="ml-2 h-4 w-4" />
+<FiArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
                 <Link href="/research">
@@ -206,7 +207,7 @@ export default function HomePage() {
                           <div className="h-3 w-32 bg-white/20 rounded animate-pulse" />
                           <div className="h-2 w-24 bg-white/10 rounded mt-2 animate-pulse" />
                         </div>
-                        <ChevronRight className="w-5 h-5 text-white/40" />
+                        <FiChevronRight className="w-5 h-5 text-white/40" />
                       </div>
                     ))}
                   </div>
@@ -238,14 +239,14 @@ export default function HomePage() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-semibold flex items-center gap-2 text-slate-800">
-                  <Calendar className="w-5 h-5 text-blue-600" />
+                  <FiCalendar className="w-5 h-5 text-brand-600" />
                   Upcoming Events
                 </h3>
                 <Link
                   href="/events"
                   className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
                 >
-                  View all <ArrowRight className="w-4 h-4" />
+                  View all <FiArrowRight className="w-4 h-4" />
                 </Link>
               </div>
 
@@ -292,16 +293,16 @@ export default function HomePage() {
                                 {event.status}
                               </Badge>
                               <span className="text-xs text-slate-400 flex items-center gap-1">
-                                <MapPin className="w-3 h-3" />
+                                <FiMapPin className="w-3 h-3" />
                                 {event.location}
                               </span>
                               <span className="text-xs text-slate-400 flex items-center gap-1">
-                                <Clock className="w-3 h-3" />
+                                <FiClock className="w-3 h-3" />
                                 {event.date || "TBD"}
                               </span>
                             </div>
                           </div>
-                          <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-blue-600 transition-colors flex-shrink-0" />
+                          <FiChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 transition-colors flex-shrink-0" />
                         </div>
                       </Card>
                     </Link>
@@ -330,7 +331,7 @@ export default function HomePage() {
                   href="/research"
                   className="text-sm text-purple-600 hover:text-purple-700 font-medium flex items-center gap-1"
                 >
-                  View all <ArrowRight className="w-4 h-4" />
+                  View all <FiArrowRight className="w-4 h-4" />
                 </Link>
               </div>
 
@@ -409,7 +410,7 @@ export default function HomePage() {
             <Link href="/events">
               <Button variant="outline" className="group">
                 View All Opportunities
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <FiArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
@@ -482,7 +483,7 @@ export default function HomePage() {
                 className="bg-white text-blue-600 hover:bg-slate-100 shadow-lg shadow-blue-500/30"
               >
                 Get Started Now
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <FiArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link href="/about">

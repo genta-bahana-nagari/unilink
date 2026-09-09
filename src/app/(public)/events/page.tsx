@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { MapPin, Users } from "lucide-react";
+import { FiMapPin, FiUsers } from "react-icons/fi";
 import Link from "next/link";
 
 export default function EventsPage() {
@@ -64,10 +64,10 @@ export default function EventsPage() {
                 </p>
                 <div className="flex items-center gap-4 text-sm text-slate-400 mb-4">
                   <span className="flex items-center gap-1">
-                    <MapPin size={14} /> {event.location}
+                    <FiMapPin size={14} /> {event.location}
                   </span>
                   <span className="flex items-center gap-1">
-                    <Users size={14} /> {event.registeredCount}/{event.quota}
+                    <FiUsers size={14} /> {event.registeredCount}/{event.quota}
                   </span>
                 </div>
                 <Link href={`/events/${event.id}`}>
