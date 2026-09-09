@@ -1,3 +1,5 @@
+"use client";
+
 import { DashboardSidebar } from "@/components/layout/dashboard-sidebar";
 import { useAuth } from "@/hooks/use-auth";
 import { adminNavigation } from "@/config/navigation";
