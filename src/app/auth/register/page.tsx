@@ -8,12 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
 import { useAuth } from "@/hooks/use-auth";
+import { UserRole, User } from "@/types/user";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("PARTICIPANT");
+  const [role, setRole] = useState<UserRole>("PARTICIPANT");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { register } = useAuth();
@@ -21,7 +22,7 @@ export default function RegisterPage() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    const result = await register({ name, email, password, role });
+    const result = await register({ name, email, role } as Partial<User>);
     setIsLoading(false);
 
     if (result.success && result.user) {
@@ -72,7 +73,7 @@ export default function RegisterPage() {
             label="Role"
             options={["ADMIN", "ORGANIZER", "PARTICIPANT"]}
             value={role}
-            onChange={(e) => setRole(e.target.value)}
+            onChange={(e) => setRole(e.target.value as UserRole)}
           />
 
           <Button type="submit" className="w-full" disabled={isLoading}>

@@ -1,15 +1,12 @@
 'use client';
 
-import { FiCalendar } from "react-icons/fi";
-import { FaBell } from "react-icons/fa6";
-import { FaFlask } from "react-icons/fa";
-import Link from "next/link";
+import { FiBell } from "react-icons/fi";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { api } from "@/lib/mock-api";
 import { Announcement } from "@/types/announcement";
 import { useEffect, useState } from "react";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function AnnouncementsPage() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
@@ -27,7 +24,7 @@ export default function AnnouncementsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-brand-600 rounded-full border-surface-300" />
+        <Spinner size="lg" />
       </div>
     );
   }
@@ -51,7 +48,7 @@ export default function AnnouncementsPage() {
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="p-2 bg-brand-50 rounded-lg">
-                <FaBell size={16} className="text-brand-600" />
+                <FiBell size={16} className="text-brand-600" />
               </div>
               <Badge
                 variant={
@@ -88,7 +85,7 @@ export default function AnnouncementsPage() {
 
       {announcements.length === 0 && (
         <div className="text-center py-12">
-          <FaBell size={48} className="mx-auto text-muted-foreground mb-4" />
+          <FiBell size={48} className="mx-auto text-muted-foreground mb-4" />
           <h3 className="text-lg font-semibold text-foreground mb-2">
             No announcements
           </h3>

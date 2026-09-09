@@ -1,10 +1,10 @@
 import { Card } from "@/components/ui/card";
-import { LucideIcon } from "react-icons/fi";
+import { IconType } from "react-icons";
 
 interface StatCardProps {
   title: string;
   value: number | string;
-  icon: LucideIcon;
+  icon: IconType;
   description?: string;
   trend?: "up" | "down" | "neutral";
   trendValue?: string;

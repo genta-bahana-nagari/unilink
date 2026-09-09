@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { forwardRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import Image from "next/image";
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {

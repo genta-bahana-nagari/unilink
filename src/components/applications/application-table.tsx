@@ -2,9 +2,9 @@
 
 import { Application } from "@/types/application";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { ApplicationStatus } from "./application-status";
 import { Avatar } from "@/components/ui/avatar";
+import { Spinner } from "@/components/ui/spinner";
 import { FiCalendar, FiMessageSquare } from "react-icons/fi";
 
 interface ApplicationTableProps {
@@ -19,7 +19,7 @@ export function ApplicationTable({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <Spinner size="lg" />
       </div>
     );
   }
@@ -60,7 +60,7 @@ export function ApplicationTable({
             </div>
             {app.feedback && (
               <div className="text-sm text-slate-500 max-w-xs">
-                <p className="italic">"{app.feedback}"</p>
+                <p className="italic">&ldquo;{app.feedback}&rdquo;</p>
               </div>
             )}
           </div>

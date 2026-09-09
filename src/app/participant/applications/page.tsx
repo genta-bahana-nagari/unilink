@@ -5,11 +5,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import {
   FiSearch,
   FiCalendar,
-  FiClock,
-  FiCheckCircle,
   FiXCircle,
   FiEye,
   FiMessageSquare,
@@ -90,7 +89,7 @@ export default function ApplicationsPage() {
   if (isLoading || !user) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-brand-600 rounded-full border-surface-300" />
+        <Spinner size="lg" />
       </div>
     );
   }

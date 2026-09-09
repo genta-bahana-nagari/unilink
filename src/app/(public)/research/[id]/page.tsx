@@ -13,7 +13,6 @@ import {
   FiUser,
   FiClock,
   FiArrowLeft,
-  FiUsers,
   FiDollarSign,
   FiCheckCircle,
 } from "react-icons/fi";

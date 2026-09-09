@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -10,26 +10,16 @@ import {
   FiTarget,
   FiAward,
   FiArrowRight,
-  FiCalendar,
-  FiCheckCircle,
-  FiStar,
   FiZap,
   FiShield,
   FiGlobe,
-  FiChevronRight,
+  FiStar,
   FiTrendingUp,
-  FiClock,
-  FiMapPin,
 } from "react-icons/fi";
-import { FaFlask } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 
 export default function HomePage() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+  const [isVisible] = useState(true);
 
   const stats = [
     { label: "Active Projects", value: "500+", icon: FiTarget },

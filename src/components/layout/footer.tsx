@@ -5,7 +5,6 @@ import {
   FiTwitter,
   FiGithub,
   FiLinkedin,
-  FiMapPin,
   FiPhone,
   FiClock,
 } from "react-icons/fi";

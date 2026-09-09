@@ -6,12 +6,13 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
-import { FiArrowLeft, FiCheckCircle, FiXCircle, FiEye } from "react-icons/fi";
+import { FiArrowLeft, FiCheckCircle, FiXCircle } from "react-icons/fi";
 import Link from "next/link";
 import { api } from "@/lib/mock-api";
 import { Application } from "@/types/application";
 import { User } from "@/types/user";
 import { Event } from "@/types/event";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function EventApplicantsPage() {
   const params = useParams();
@@ -73,7 +74,7 @@ export default function EventApplicantsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-brand-600 rounded-full border-surface-300" />
+        <Spinner size="lg" />
       </div>
     );
   }

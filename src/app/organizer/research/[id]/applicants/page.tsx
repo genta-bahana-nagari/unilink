@@ -12,6 +12,7 @@ import { api } from "@/lib/mock-api";
 import { Application } from "@/types/application";
 import { User } from "@/types/user";
 import { Research } from "@/types/research";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function ResearchApplicantsPage() {
   const params = useParams();
@@ -73,7 +74,7 @@ export default function ResearchApplicantsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-blue-600 rounded-full border-slate-300" />
+        <Spinner size="lg" />
       </div>
     );
   }

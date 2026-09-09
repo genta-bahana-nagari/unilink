@@ -7,14 +7,14 @@ import {
   FiUser,
   FiList,
   FiSearch,
-  FiEdit3,
 } from "react-icons/fi";
 import { FaFlask } from "react-icons/fa";
+import { IconType } from "react-icons";
 
 export interface NavigationItem {
   label: string;
   href: string;
-  icon: any;
+  icon: IconType;
   exact?: boolean;
 }
 

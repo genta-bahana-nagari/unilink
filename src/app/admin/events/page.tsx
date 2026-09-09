@@ -5,7 +5,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { FiSearch, FiMapPin, FiUsers, FiCalendar } from "react-icons/fi";
+import { Spinner } from "@/components/ui/spinner";
+import { FiSearch, FiMapPin, FiUsers } from "react-icons/fi";
 import { api } from "@/lib/mock-api";
 import { Event } from "@/types/event";
 
@@ -50,7 +51,7 @@ export default function AdminEventsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-brand-600 rounded-full border-surface-300" />
+        <Spinner size="lg" />
       </div>
     );
   }

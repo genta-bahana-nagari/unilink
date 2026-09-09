@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { Announcement } from "@/types/announcement";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Avatar } from "@/components/ui/avatar";
 import { FiCalendar, FiBell } from "react-icons/fi";
 
 const typeColors = {

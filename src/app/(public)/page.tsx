@@ -1,22 +1,19 @@
 // src/app/(public)/page.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Avatar } from "@/components/ui/avatar";
 import { useEvents } from "@/hooks/use-events";
 import { useResearch } from "@/hooks/use-research";
 import {
   FiCalendar,
-  FiFlask,
   FiArrowRight,
   FiTrendingUp,
   FiUsers,
   FiClock,
-  FiStar,
   FiTarget,
   FiAward,
   FiChevronRight,
@@ -30,11 +27,7 @@ import { cn } from "@/lib/utils";
 export default function HomePage() {
   const { events, isLoading: eventsLoading } = useEvents();
   const { research, isLoading: researchLoading } = useResearch();
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+  const [isVisible] = useState(true);
 
   const featuredEvents = events.slice(0, 3);
   const featuredResearch = research.slice(0, 3);
@@ -298,7 +291,7 @@ export default function HomePage() {
                               </span>
                               <span className="text-xs text-slate-400 flex items-center gap-1">
                                 <FiClock className="w-3 h-3" />
-                                {event.date || "TBD"}
+                                {event.startDate ? new Date(event.startDate).toLocaleDateString() : "TBD"}
                               </span>
                             </div>
                           </div>
@@ -324,7 +317,7 @@ export default function HomePage() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-semibold flex items-center gap-2 text-slate-800">
-                  <FlaskConical className="w-5 h-5 text-purple-600" />
+                  <FaFlask className="w-5 h-5 text-purple-600" />
                   Research Studies
                 </h3>
                 <Link
@@ -378,16 +371,16 @@ export default function HomePage() {
                                 {r.status}
                               </Badge>
                               <span className="text-xs text-slate-400 flex items-center gap-1">
-                                <Users className="w-3 h-3" />
+                                <FiUsers className="w-3 h-3" />
                                 {r.researcher}
                               </span>
                               <span className="text-xs text-slate-400 flex items-center gap-1">
-                                <Briefcase className="w-3 h-3" />
-                                {r.field || "Research"}
+                                <FiBriefcase className="w-3 h-3" />
+                                {r.category || "Research"}
                               </span>
                             </div>
                           </div>
-                          <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-purple-600 transition-colors flex-shrink-0" />
+                          <FiChevronRight className="w-5 h-5 text-slate-400 group-hover:text-purple-600 transition-colors flex-shrink-0" />
                         </div>
                       </Card>
                     </Link>
@@ -422,7 +415,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-blue-100 text-blue-700 border-0 px-4 py-1.5 text-sm">
-              <Sparkles className="w-4 h-4 mr-1.5" />
+              <FiZap className="w-4 h-4 mr-1.5" />
               Simple Process
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">

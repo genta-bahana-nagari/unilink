@@ -12,7 +12,6 @@ import { Spinner } from "@/components/ui/spinner";
 import {
   FiCalendar,
   FiMapPin,
-  FiUsers,
   FiClock,
   FiArrowLeft,
   FiVideo,
@@ -109,7 +108,7 @@ export default function EventDetailPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Clock size={18} className="text-slate-400" />
+                  <FiClock size={18} className="text-slate-400" />
                   <div>
                     <p className="text-xs text-slate-400">End Date</p>
                     <p className="text-sm font-medium">

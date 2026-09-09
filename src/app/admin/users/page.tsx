@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { FiSearch, FiShield, FiXCircle, FiCheckCircle } from "react-icons/fi";
+import { Spinner } from "@/components/ui/spinner";
+import { FiSearch, FiXCircle, FiCheckCircle } from "react-icons/fi";
 import { api } from "@/lib/mock-api";
 import { User } from "@/types/user";
 
@@ -54,7 +55,7 @@ export default function AdminUsersPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-brand-600 rounded-full border-surface-300" />
+        <Spinner size="lg" />
       </div>
     );
   }

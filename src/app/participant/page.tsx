@@ -5,12 +5,14 @@ import { StatCard } from "@/components/dashboard/stat-card";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import {
   FiFileText,
   FiCheckCircle,
   FiClock,
   FiArrowRight,
   FiCalendar,
+  FiXCircle,
 } from "react-icons/fi";
 import { FaFlask } from "react-icons/fa";
 import Link from "next/link";
@@ -46,7 +48,7 @@ export default function ParticipantDashboardPage() {
   if (isLoading || !user) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin h-8 w-8 border-3 border-brand-600 rounded-full border-surface-300" />
+        <Spinner size="lg" />
       </div>
     );
   }
