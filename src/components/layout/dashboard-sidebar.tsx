@@ -1,3 +1,5 @@
+"use client";
+
 import { NavigationItem } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
