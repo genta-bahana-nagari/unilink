@@ -24,6 +24,7 @@
 .DS_Store
 *.pem
 .opencode
+PRD.*
 
 # debug
 npm-debug.log*
