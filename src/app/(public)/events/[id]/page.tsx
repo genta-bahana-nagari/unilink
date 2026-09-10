@@ -17,6 +17,7 @@ import {
   FiVideo,
   FiExternalLink,
 } from "react-icons/fi";
+import { cn } from "@/lib/utils";
 
 export default function EventDetailPage() {
   const params = useParams();
@@ -38,7 +39,7 @@ export default function EventDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-background">
         <Spinner size="lg" />
       </div>
     );
@@ -46,8 +47,8 @@ export default function EventDetailPage() {
 
   if (error || !event) {
     return (
-      <div className="text-center py-20">
-        <p className="text-red-600 mb-4">{error || "Event not found"}</p>
+      <div className="text-center py-20 bg-background">
+        <p className="text-destructive mb-4">{error || "Event not found"}</p>
         <Button variant="outline" onClick={() => router.back()}>
           Go Back
         </Button>
@@ -64,64 +65,68 @@ export default function EventDetailPage() {
   };
 
   const spotsLeft = event.quota - event.registeredCount;
+  const progressPercent = (event.registeredCount / event.quota) * 100;
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <Link
           href="/events"
-          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 mb-6"
+          className={cn(
+            "inline-flex items-center gap-2 text-sm mb-6 transition-colors",
+            "text-muted-foreground hover:text-primary"
+          )}
         >
           <FiArrowLeft size={16} /> Back to Events
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <Card className="p-8">
+            <Card className={cn("p-8", "border-border", "bg-card")}>
               <div className="flex items-start justify-between mb-4">
-                <h1 className="text-3xl font-bold">{event.title}</h1>
+                <h1 className="text-3xl font-bold text-foreground">{event.title}</h1>
                 <Badge variant={statusColors[event.status]}>{event.status}</Badge>
               </div>
               <Badge variant="info" className="mb-6">
                 {event.category}
               </Badge>
-              <p className="text-slate-600 leading-relaxed">{event.description}</p>
+              <p className="text-muted-foreground leading-relaxed">{event.description}</p>
             </Card>
 
-            <Card className="p-8">
-              <h2 className="text-xl font-semibold mb-4">Key Information</h2>
+            <Card className={cn("p-8", "border-border", "bg-card")}>
+              <h2 className="text-xl font-semibold text-foreground mb-4">Key Information</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex items-center gap-3">
-                  <FiMapPin size={18} className="text-slate-400" />
+                  <FiMapPin size={18} className="text-muted-foreground" />
                   <div>
-                    <p className="text-xs text-slate-400">Location</p>
-                    <p className="text-sm font-medium">{event.location}</p>
+                    <p className="text-xs text-muted-foreground">Location</p>
+                    <p className="text-sm font-medium text-foreground">{event.location}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <FiCalendar size={18} className="text-slate-400" />
+                  <FiCalendar size={18} className="text-muted-foreground" />
                   <div>
-                    <p className="text-xs text-slate-400">Start Date</p>
-                    <p className="text-sm font-medium">
+                    <p className="text-xs text-muted-foreground">Start Date</p>
+                    <p className="text-sm font-medium text-foreground">
                       {new Date(event.startDate).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <FiClock size={18} className="text-slate-400" />
+                  <FiClock size={18} className="text-muted-foreground" />
                   <div>
-                    <p className="text-xs text-slate-400">End Date</p>
-                    <p className="text-sm font-medium">
+                    <p className="text-xs text-muted-foreground">End Date</p>
+                    <p className="text-sm font-medium text-foreground">
                       {new Date(event.endDate).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
                 {event.deadline && (
                   <div className="flex items-center gap-3">
-<FiClock size={18} className="text-slate-400" />
+                    <FiClock size={18} className="text-muted-foreground" />
                     <div>
-                      <p className="text-xs text-slate-400">Application Deadline</p>
-                      <p className="text-sm font-medium">
+                      <p className="text-xs text-muted-foreground">Application Deadline</p>
+                      <p className="text-sm font-medium text-foreground">
                         {new Date(event.deadline).toLocaleDateString()}
                       </p>
                     </div>
@@ -129,10 +134,10 @@ export default function EventDetailPage() {
                 )}
                 {event.isOnline && (
                   <div className="flex items-center gap-3">
-                    <FiVideo size={18} className="text-slate-400" />
+                    <FiVideo size={18} className="text-muted-foreground" />
                     <div>
-                      <p className="text-xs text-slate-400">Format</p>
-                      <p className="text-sm font-medium">Online Event</p>
+                      <p className="text-xs text-muted-foreground">Format</p>
+                      <p className="text-sm font-medium text-foreground">Online Event</p>
                     </div>
                   </div>
                 )}
@@ -141,23 +146,21 @@ export default function EventDetailPage() {
           </div>
 
           <div>
-            <Card className="p-6 sticky top-6">
+            <Card className={cn("p-6 sticky top-6", "border-border", "bg-card")}>
               <div className="text-center mb-6">
-                <div className="text-3xl font-bold text-blue-600">
+                <div className="text-3xl font-bold text-primary">
                   {event.registeredCount}
                 </div>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-muted-foreground">
                   of {event.quota} spots filled
                 </p>
-                <div className="w-full bg-slate-100 rounded-full h-2 mt-3">
+                <div className="w-full bg-muted rounded-full h-2 mt-3">
                   <div
-                    className="bg-blue-600 h-2 rounded-full"
-                    style={{
-                      width: `${(event.registeredCount / event.quota) * 100}%`,
-                    }}
+                    className="bg-primary h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${progressPercent}%` }}
                   />
                 </div>
-                <p className="text-xs text-slate-400 mt-2">
+                <p className="text-xs text-muted-foreground mt-2">
                   {spotsLeft > 0 ? `${spotsLeft} spots remaining` : "Event full"}
                 </p>
               </div>
