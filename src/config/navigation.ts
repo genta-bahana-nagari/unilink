@@ -7,6 +7,9 @@ import {
   FiUser,
   FiList,
   FiSearch,
+  FiBriefcase,
+  FiBookOpen,
+  FiMail,
 } from "react-icons/fi";
 import { GiMicroscope } from "react-icons/gi";
 import { IconType } from "react-icons";
@@ -47,6 +50,9 @@ export const publicNavigation: NavigationItem[] = [
   { label: "Events", href: "/events", icon: FiCalendar },
   { label: "Research", href: "/research", icon: GiMicroscope },
   { label: "Announcements", href: "/announcements", icon: FiBell },
+  { label: "Careers", href: "/careers", icon: FiBriefcase },
+  { label: "Blog", href: "/blog", icon: FiBookOpen },
+  { label: "Contact", href: "/contact", icon: FiMail },
 ];
 
 export function getNavigationByRole(role: string | null): NavigationItem[] {
