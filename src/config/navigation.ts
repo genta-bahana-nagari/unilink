@@ -8,7 +8,7 @@ import {
   FiList,
   FiSearch,
 } from "react-icons/fi";
-import { FaFlask } from "react-icons/fa";
+import { GiMicroscope } from "react-icons/gi";
 import { IconType } from "react-icons";
 
 export interface NavigationItem {
@@ -23,7 +23,7 @@ export const adminNavigation: NavigationItem[] = [
   { label: "Users", href: "/admin/users", icon: FiUsers },
   { label: "Organizers", href: "/admin/organizers", icon: FiUsers },
   { label: "Events", href: "/admin/events", icon: FiCalendar },
-  { label: "Research", href: "/admin/research", icon: FaFlask },
+  { label: "Research", href: "/admin/research", icon: GiMicroscope },
   { label: "Announcements", href: "/admin/announcements", icon: FiBell },
   { label: "Approvals", href: "/admin/approvals", icon: FiCheckCircle },
 ];
@@ -31,7 +31,7 @@ export const adminNavigation: NavigationItem[] = [
 export const organizerNavigation: NavigationItem[] = [
   { label: "Dashboard", href: "/organizer", icon: FiLayout, exact: true },
   { label: "Events", href: "/organizer/events", icon: FiCalendar },
-  { label: "Research", href: "/organizer/research", icon: FaFlask },
+  { label: "Research", href: "/organizer/research", icon: GiMicroscope },
   { label: "Announcements", href: "/organizer/announcements", icon: FiBell },
   { label: "Profile", href: "/organizer/profile", icon: FiUser },
 ];
@@ -45,7 +45,7 @@ export const participantNavigation: NavigationItem[] = [
 
 export const publicNavigation: NavigationItem[] = [
   { label: "Events", href: "/events", icon: FiCalendar },
-  { label: "Research", href: "/research", icon: FaFlask },
+  { label: "Research", href: "/research", icon: GiMicroscope },
   { label: "Announcements", href: "/announcements", icon: FiBell },
 ];
 

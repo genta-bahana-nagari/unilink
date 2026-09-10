@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useAuth } from "@/hooks/use-auth";
-import { publicNavigation, getNavigationByRole } from "@/config/navigation";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -16,164 +14,438 @@ import {
   FiSun,
   FiChevronDown,
 } from "react-icons/fi";
+
+import { useAuth } from "@/hooks/use-auth";
+import { publicNavigation, getNavigationByRole } from "@/config/navigation";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
+import { useDarkMode } from "@/providers/dark-mode-provider";
 
 export function PublicNavbar() {
   const { user, logout, isAuthenticated, role } = useAuth();
   const pathname = usePathname();
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const { isDark, toggleDark } = useDarkMode();
 
   const navigation =
     isAuthenticated && role ? getNavigationByRole(role) : publicNavigation;
 
-  // Handle scroll effect
+  /* --------------------------------
+     Scroll detection
+  -------------------------------- */
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
     };
+
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  // Close mobile menu on route change
+  /* --------------------------------
+     Close menus when route changes
+  -------------------------------- */
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsUserMenuOpen(false);
   }, [pathname]);
 
-  // Toggle dark mode
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark");
-  };
+  /* --------------------------------
+     Close user menu when clicking outside
+  -------------------------------- */
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
 
+      if (
+        !target.closest("[data-user-menu]") &&
+        !target.closest("[data-user-menu-button]")
+      ) {
+        setIsUserMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  /* --------------------------------
+     Desktop navigation styles
+  -------------------------------- */
   const navLinkClasses = (href: string) =>
     cn(
-      "flex items-center gap-2 text-sm font-medium transition-colors duration-200",
-      "hover:text-brand-600",
-      pathname === href ? "text-brand-600" : "text-muted-foreground",
+      "relative",
+      "flex items-center justify-center",
+      "w-9 h-9",
+      "rounded-full",
+      "transition-all duration-200",
+      "group",
+
+      pathname === href
+        ? "bg-black text-white dark:bg-white dark:text-black"
+        : [
+            "text-neutral-500 dark:text-neutral-400",
+            "hover:bg-neutral-100 dark:hover:bg-neutral-800",
+            "hover:text-black dark:hover:text-white",
+          ],
     );
 
+  /* --------------------------------
+     Mobile navigation styles
+  -------------------------------- */
   const mobileNavLinkClasses = (href: string) =>
     cn(
-      "flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-colors duration-200",
-      "hover:bg-brand-50 hover:text-brand-600",
-      pathname === href ? "bg-brand-50 text-brand-600" : "text-foreground",
+      "flex items-center gap-3",
+      "w-full",
+      "px-4 py-3",
+      "rounded-xl",
+      "text-base font-medium",
+      "transition-all duration-200",
+
+      pathname === href
+        ? "bg-black text-white dark:bg-white dark:text-black"
+        : [
+            "text-foreground",
+            "hover:bg-neutral-100",
+            "dark:hover:bg-neutral-800",
+          ],
     );
 
   return (
     <>
-      <nav
-        className={cn(
-          "sticky top-0 z-50 w-full transition-all duration-300",
-          isScrolled
-            ? "bg-card/90 backdrop-blur-md shadow-sm border-b border-border/50"
-            : "bg-card border-b border-border",
-        )}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo */}
+      {/* =========================================================
+          DESKTOP / MAIN NAVBAR
+          ========================================================= */}
+
+      <div className="sticky top-4 z-50 w-full px-3 sm:px-6 pointer-events-none">
+        <nav
+          className={cn(
+            /* IMPORTANT:
+               The navbar itself is the capsule.
+               It is NOT full width.
+            */
+            "mx-auto",
+            "w-fit max-w-[calc(100vw-1.5rem)]",
+
+            /* Capsule */
+            "rounded-full",
+
+            /* Layout */
+            "flex items-center",
+
+            /* Border */
+            "border",
+
+            /* Glass */
+            "bg-white/85 dark:bg-neutral-950/85",
+            "backdrop-blur-2xl",
+
+            /* Shadow */
+            "shadow-[0_8px_30px_rgba(0,0,0,0.08)]",
+            "dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)]",
+
+            /* Animation */
+            "transition-all duration-300",
+
+            isScrolled
+              ? [
+                  "border-neutral-300/80",
+                  "dark:border-neutral-700/80",
+                  "shadow-[0_12px_40px_rgba(0,0,0,0.12)]",
+                  "dark:shadow-[0_12px_40px_rgba(0,0,0,0.45)]",
+                ]
+              : ["border-neutral-200/70", "dark:border-neutral-800/70"],
+
+            /* Keep navbar clickable */
+            "pointer-events-auto",
+          )}
+        >
+          <div
+            className={cn(
+              "flex items-center",
+              "h-14 sm:h-16",
+              "px-2 sm:px-3 md:px-4",
+              "w-full",
+            )}
+          >
+            {/* =====================================================
+                LOGO
+                ===================================================== */}
+
             <Link
               href={isAuthenticated && role === "ADMIN" ? "/admin" : "/"}
-              className="flex items-center gap-3 shrink-0"
+              className="flex items-center gap-2.5 shrink-0 px-2"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-md shadow-brand-200">
-                <span className="text-white font-bold text-lg">C</span>
+              <div
+                className={cn(
+                  "flex items-center justify-center",
+                  "w-9 h-9 sm:w-10 sm:h-10",
+                  "rounded-full",
+                  "bg-black dark:bg-white",
+                  "shadow-sm",
+                )}
+              >
+                <span className="text-white dark:text-black font-bold text-sm">
+                  U
+                </span>
               </div>
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text text-transparent">
+
+              <span className="text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white">
                 UniLink
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1 lg:gap-2">
+            {/* =====================================================
+                DESKTOP NAVIGATION
+                ===================================================== */}
+
+            <div className="hidden md:flex items-center gap-1 ml-3 pl-3 border-l border-neutral-200 dark:border-neutral-800">
               {navigation.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={cn(
-                    navLinkClasses(item.href),
-                    "px-3 py-2 rounded-lg",
-                  )}
+                  className={navLinkClasses(item.href)}
+                  aria-label={item.label}
+                  title={item.label}
                 >
-                  <item.icon size={18} />
-                  {item.label}
+                  <item.icon size={17} />
+
+                  {/* Tooltip */}
+                  <span
+                    className={cn(
+                      "absolute",
+                      "top-full mt-2",
+                      "left-1/2 -translate-x-1/2",
+                      "whitespace-nowrap",
+                      "px-2 py-1",
+                      "rounded-md",
+                      "bg-black dark:bg-white",
+                      "text-white dark:text-black",
+                      "text-[11px]",
+                      "opacity-0 scale-95",
+                      "pointer-events-none",
+                      "group-hover:opacity-100",
+                      "group-hover:scale-100",
+                      "transition-all duration-150",
+                      "z-[100]",
+                    )}
+                  >
+                    {item.label}
+                  </span>
                 </Link>
               ))}
             </div>
 
-            {/* Desktop Right Section */}
-            <div className="hidden md:flex items-center gap-3 lg:gap-4">
-              {/* Search Bar */}
-              <div className="relative">
-                <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            {/* =====================================================
+                DESKTOP ACTIONS
+                ===================================================== */}
+
+            <div className="hidden md:flex items-center gap-1.5 ml-3 pl-3 border-l border-neutral-200 dark:border-neutral-800">
+              {/* Search */}
+              <div className="relative group">
+                <FiSearch
+                  size={15}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none"
+                />
+
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-48 lg:w-64 pl-9 pr-4 py-2 text-sm rounded-lg border border-border bg-muted/50 focus:bg-card focus:border-brand-400 focus:ring-2 focus:ring-brand-400/20 outline-none transition-all"
+                  className={cn(
+                    "h-9",
+                    "w-32 lg:w-40",
+                    "pl-8 pr-3",
+                    "rounded-full",
+                    "text-sm",
+                    "text-foreground",
+                    "placeholder:text-neutral-400",
+
+                    "bg-neutral-100/80",
+                    "dark:bg-neutral-900/80",
+
+                    "border border-transparent",
+                    "focus:border-neutral-300",
+                    "dark:focus:border-neutral-700",
+
+                    "focus:bg-white",
+                    "dark:focus:bg-neutral-900",
+
+                    "focus:outline-none",
+                    "focus:ring-2",
+                    "focus:ring-black/5",
+                    "dark:focus:ring-white/10",
+
+                    "transition-all duration-200",
+
+                    "focus:w-40 lg:focus:w-52",
+                  )}
                 />
               </div>
 
-              {/* Dark Mode Toggle */}
+              {/* Dark Mode */}
               <button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground"
+                type="button"
+                onClick={toggleDark}
                 aria-label="Toggle dark mode"
+                className={cn(
+                  "flex items-center justify-center",
+                  "w-9 h-9",
+                  "rounded-full",
+                  "text-neutral-600 dark:text-neutral-400",
+                  "hover:bg-neutral-100",
+                  "dark:hover:bg-neutral-800",
+                  "hover:text-black",
+                  "dark:hover:text-white",
+                  "transition-colors",
+                )}
               >
-                {isDarkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
+                {isDark ? <FiSun size={17} /> : <FiMoon size={17} />}
               </button>
 
               {/* Notifications */}
               {isAuthenticated && (
-                <button className="relative p-2 rounded-lg hover:bg-muted transition-colors text-muted-foreground">
-                  <FiBell size={18} />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-danger rounded-full animate-pulse" />
+                <button
+                  type="button"
+                  aria-label="Notifications"
+                  className={cn(
+                    "relative",
+                    "flex items-center justify-center",
+                    "w-9 h-9",
+                    "rounded-full",
+                    "text-neutral-600 dark:text-neutral-400",
+                    "hover:bg-neutral-100",
+                    "dark:hover:bg-neutral-800",
+                    "hover:text-black",
+                    "dark:hover:text-white",
+                    "transition-colors",
+                  )}
+                >
+                  <FiBell size={17} />
+
+                  <span
+                    className={cn(
+                      "absolute",
+                      "top-2 right-2",
+                      "w-1.5 h-1.5",
+                      "rounded-full",
+                      "bg-black dark:bg-white",
+                    )}
+                  />
                 </button>
               )}
 
-              {/* Auth Buttons */}
+              {/* =================================================
+                  USER MENU
+                  ================================================= */}
+
               {isAuthenticated ? (
-                <div className="relative">
+                <div className="relative ml-1" data-user-menu>
                   <button
-                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-muted transition-colors"
+                    type="button"
+                    data-user-menu-button
+                    onClick={() => setIsUserMenuOpen((current) => !current)}
+                    className={cn(
+                      "flex items-center gap-2",
+                      "h-10",
+                      "pl-1 pr-2.5",
+                      "rounded-full",
+                      "hover:bg-neutral-100",
+                      "dark:hover:bg-neutral-800",
+                      "transition-colors",
+                    )}
                   >
                     <Avatar
                       fallback={user?.name?.[0]?.toUpperCase() || "U"}
                       size="sm"
                     />
-                    <span className="text-sm font-medium text-foreground hidden lg:inline">
+
+                    <span className="hidden lg:block max-w-24 truncate text-sm font-medium text-foreground">
                       {user?.name || "User"}
                     </span>
+
                     <FiChevronDown
-                      size={16}
-                      className="text-muted-foreground"
+                      size={14}
+                      className={cn(
+                        "text-neutral-400",
+                        "dark:text-neutral-500",
+                        "transition-transform",
+                        isUserMenuOpen && "rotate-180",
+                      )}
                     />
                   </button>
 
                   {/* User Dropdown */}
                   {isUserMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-card rounded-lg shadow-lg border border-border py-1 z-50">
+                    <div
+                      className={cn(
+                        "absolute",
+                        "right-0",
+                        "top-[calc(100%+10px)]",
+                        "w-52",
+                        "overflow-hidden",
+                        "rounded-2xl",
+                        "border",
+                        "border-neutral-200",
+                        "dark:border-neutral-800",
+                        "bg-white",
+                        "dark:bg-neutral-950",
+                        "shadow-xl",
+                        "shadow-black/10",
+                        "dark:shadow-black/40",
+                        "p-1.5",
+                        "z-[100]",
+                      )}
+                    >
                       <Link
                         href="/profile"
-                        className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors"
                         onClick={() => setIsUserMenuOpen(false)}
+                        className={cn(
+                          "flex items-center gap-3",
+                          "w-full",
+                          "px-3 py-2.5",
+                          "rounded-xl",
+                          "text-sm",
+                          "text-foreground",
+                          "hover:bg-neutral-100",
+                          "dark:hover:bg-neutral-800",
+                          "transition-colors",
+                        )}
                       >
                         <FiUser size={16} />
                         Profile
                       </Link>
+
                       <button
+                        type="button"
                         onClick={() => {
                           setIsUserMenuOpen(false);
                           logout();
                         }}
-                        className="flex items-center gap-2 w-full px-4 py-2 text-sm text-danger hover:bg-danger-bg transition-colors"
+                        className={cn(
+                          "flex items-center gap-3",
+                          "w-full",
+                          "px-3 py-2.5",
+                          "rounded-xl",
+                          "text-sm",
+                          "text-red-600",
+                          "hover:bg-red-50",
+                          "dark:hover:bg-red-950/50",
+                          "transition-colors",
+                        )}
                       >
                         <FiLogOut size={16} />
                         Logout
@@ -182,17 +454,23 @@ export function PublicNavbar() {
                   )}
                 </div>
               ) : (
-                <div className="flex items-center gap-2">
+                /* =================================================
+                   GUEST ACTIONS
+                   ================================================= */
+
+                <div className="flex items-center gap-1.5 ml-1">
                   <Link href="/auth/login">
-                    <Button variant="ghost" size="sm">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="rounded-full px-4"
+                    >
                       Sign In
                     </Button>
                   </Link>
+
                   <Link href="/auth/register">
-                    <Button
-                      size="sm"
-                      className="bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800"
-                    >
+                    <Button size="sm" className="rounded-full px-4">
                       Get Started
                     </Button>
                   </Link>
@@ -200,38 +478,117 @@ export function PublicNavbar() {
               )}
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* =====================================================
+                MOBILE MENU BUTTON
+                ===================================================== */}
+
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors text-foreground"
+              type="button"
+              onClick={() => setIsMobileMenuOpen((current) => !current)}
               aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+              className={cn(
+                "md:hidden",
+                "ml-auto",
+                "flex items-center justify-center",
+                "w-10 h-10",
+                "rounded-full",
+                "text-foreground",
+                "hover:bg-neutral-100",
+                "dark:hover:bg-neutral-800",
+                "transition-colors",
+              )}
             >
-              {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+              {isMobileMenuOpen ? <FiX size={21} /> : <FiMenu size={21} />}
             </button>
           </div>
-        </div>
+        </nav>
+      </div>
 
-        {/* Mobile Menu */}
+      {/* =========================================================
+          MOBILE OVERLAY
+          ========================================================= */}
+
+      {isMobileMenuOpen && (
         <div
-          className={cn(
-            "md:hidden fixed inset-x-0 top-16 sm:top-20 bg-card/95 backdrop-blur-lg border-b border-border shadow-lg transition-all duration-300 overflow-hidden",
-            isMobileMenuOpen
-              ? "max-h-[calc(100vh-4rem)] opacity-100"
-              : "max-h-0 opacity-0",
-          )}
-        >
-          <div className="px-4 py-3 space-y-1 overflow-y-auto max-h-[calc(100vh-4rem)]">
-            {/* Search Bar Mobile */}
-            <div className="relative mb-3">
-              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full pl-9 pr-4 py-3 text-sm rounded-lg border border-border bg-muted focus:bg-card focus:border-brand-400 focus:ring-2 focus:ring-brand-400/20 outline-none transition-all"
-              />
-            </div>
+          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
 
-            {/* Navigation Links */}
+      {/* =========================================================
+          MOBILE MENU
+          ========================================================= */}
+
+      <div
+        className={cn(
+          "fixed",
+          "z-50",
+          "md:hidden",
+          "top-[5.25rem]",
+          "left-3 right-3 sm:left-6 sm:right-6",
+
+          "rounded-3xl",
+          "border",
+          "border-neutral-200",
+          "dark:border-neutral-800",
+
+          "bg-white/95",
+          "dark:bg-neutral-950/95",
+
+          "backdrop-blur-2xl",
+
+          "shadow-2xl",
+          "shadow-black/10",
+          "dark:shadow-black/40",
+
+          "overflow-hidden",
+
+          "transition-all duration-300 ease-out",
+
+          isMobileMenuOpen
+            ? [
+                "opacity-100",
+                "translate-y-0",
+                "pointer-events-auto",
+                "max-h-[calc(100vh-6rem)]",
+              ]
+            : ["opacity-0", "-translate-y-3", "pointer-events-none", "max-h-0"],
+        )}
+      >
+        <div className="p-4 overflow-y-auto max-h-[calc(100vh-6rem)]">
+          {/* Mobile Search */}
+          <div className="relative mb-3">
+            <FiSearch
+              size={17}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400"
+            />
+
+            <input
+              type="text"
+              placeholder="Search..."
+              className={cn(
+                "w-full",
+                "h-11",
+                "pl-10 pr-4",
+                "rounded-2xl",
+                "border border-neutral-200",
+                "dark:border-neutral-800",
+                "bg-neutral-100",
+                "dark:bg-neutral-900",
+                "text-sm",
+                "text-foreground",
+                "placeholder:text-neutral-400",
+                "outline-none",
+                "focus:border-black",
+                "dark:focus:border-white",
+                "transition-all",
+              )}
+            />
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="space-y-1">
             {navigation.map((item) => (
               <Link
                 key={item.href}
@@ -239,71 +596,110 @@ export function PublicNavbar() {
                 className={mobileNavLinkClasses(item.href)}
               >
                 <item.icon size={20} />
-                {item.label}
+                <span>{item.label}</span>
               </Link>
             ))}
-
-            <div className="h-px bg-border my-3" />
-
-            {/* Auth Section Mobile */}
-            {isAuthenticated ? (
-              <>
-                <Link
-                  href="/profile"
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-foreground hover:bg-brand-50 hover:text-brand-600 transition-colors"
-                >
-                  <Avatar
-                    fallback={user?.name?.[0]?.toUpperCase() || "U"}
-                    size="sm"
-                  />
-                  <span>{user?.name || "Profile"}</span>
-                </Link>
-                <button
-                  onClick={logout}
-                  className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-base font-medium text-danger hover:bg-danger-bg transition-colors"
-                >
-                  <FiLogOut size={20} />
-                  Logout
-                </button>
-              </>
-            ) : (
-              <div className="space-y-2">
-                <Link
-                  href="/auth/login"
-                  className="flex items-center justify-center w-full px-4 py-3 rounded-lg text-base font-medium text-foreground border border-border hover:bg-muted transition-colors"
-                >
-                  <FiUser size={20} className="mr-2" />
-                  Sign In
-                </Link>
-                <Link
-                  href="/auth/register"
-                  className="flex items-center justify-center w-full px-4 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 transition-all"
-                >
-                  Get Started
-                </Link>
-              </div>
-            )}
-
-            {/* Dark Mode Toggle Mobile */}
-            <button
-              onClick={toggleDarkMode}
-              className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-base font-medium text-foreground hover:bg-brand-50 hover:text-brand-600 transition-colors"
-            >
-              {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
-              {isDarkMode ? "Light Mode" : "Dark Mode"}
-            </button>
           </div>
-        </div>
-      </nav>
 
-      {/* Overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
+          <div className="h-px bg-neutral-200 dark:bg-neutral-800 my-3" />
+
+          {/* Mobile Authentication */}
+          {isAuthenticated ? (
+            <div className="space-y-1">
+              <Link
+                href="/profile"
+                className={cn(
+                  "flex items-center gap-3",
+                  "w-full",
+                  "px-4 py-3",
+                  "rounded-xl",
+                  "text-base font-medium",
+                  "text-foreground",
+                  "hover:bg-neutral-100",
+                  "dark:hover:bg-neutral-800",
+                  "transition-colors",
+                )}
+              >
+                <Avatar
+                  fallback={user?.name?.[0]?.toUpperCase() || "U"}
+                  size="sm"
+                />
+
+                <span>{user?.name || "Profile"}</span>
+              </Link>
+
+              <button
+                type="button"
+                onClick={logout}
+                className={cn(
+                  "flex items-center gap-3",
+                  "w-full",
+                  "px-4 py-3",
+                  "rounded-xl",
+                  "text-base font-medium",
+                  "text-red-600",
+                  "hover:bg-red-50",
+                  "dark:hover:bg-red-950/50",
+                  "transition-colors",
+                )}
+              >
+                <FiLogOut size={20} />
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <Link
+                href="/auth/login"
+                className={cn(
+                  "flex items-center justify-center",
+                  "w-full",
+                  "h-11",
+                  "rounded-xl",
+                  "border border-neutral-200",
+                  "dark:border-neutral-800",
+                  "text-foreground",
+                  "font-medium",
+                  "hover:bg-neutral-100",
+                  "dark:hover:bg-neutral-800",
+                  "transition-colors",
+                )}
+              >
+                <FiUser size={18} className="mr-2" />
+                Sign In
+              </Link>
+
+              <Link href="/auth/register" className="block">
+                <Button size="sm" className="w-full h-11 rounded-xl">
+                  Get Started
+                </Button>
+              </Link>
+            </div>
+          )}
+
+          {/* Mobile Dark Mode */}
+          <button
+            type="button"
+            onClick={toggleDark}
+            className={cn(
+              "flex items-center gap-3",
+              "w-full",
+              "mt-2",
+              "px-4 py-3",
+              "rounded-xl",
+              "text-base font-medium",
+              "text-foreground",
+              "hover:bg-neutral-100",
+              "dark:hover:bg-neutral-800",
+              "transition-colors",
+            )}
+          >
+            {isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
+
+            <span>{isDark ? "Light Mode" : "Dark Mode"}</span>
+          </button>
+        </div>
+      </div>
     </>
   );
 }
-

@@ -12,25 +12,17 @@ export interface ButtonProps
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ 
-    className, 
-    variant = "default", 
-    size = "default", 
-    isLoading = false,
-    children,
-    disabled,
-    ...props 
-  }, ref) => {
+  ({ className, variant = "default", size = "default", isLoading = false, children, disabled, ...props }, ref) => {
     const baseStyles =
-      "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2";
+      "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2";
 
     const variants = {
-      default: "bg-brand-600 text-white hover:bg-brand-700 shadow-sm hover:shadow-md",
-      outline: "border border-border bg-card hover:bg-muted text-foreground",
-      ghost: "hover:bg-muted text-foreground hover:text-brand-600",
-      destructive: "bg-danger text-white hover:bg-red-700 shadow-sm hover:shadow-md",
-      success: "bg-success text-white hover:bg-green-700 shadow-sm hover:shadow-md",
-      warning: "bg-warning text-white hover:bg-yellow-600 shadow-sm hover:shadow-md",
+      default: "bg-black text-white hover:bg-neutral-800 shadow-sm hover:shadow-md",
+      outline: "border border-black bg-transparent hover:bg-black text-foreground hover:text-white",
+      ghost: "hover:bg-muted text-foreground hover:text-black",
+      destructive: "bg-red-600 text-white hover:bg-red-700 shadow-sm hover:shadow-md",
+      success: "bg-black text-white hover:bg-neutral-800 shadow-sm hover:shadow-md",
+      warning: "bg-neutral-800 text-white hover:bg-black shadow-sm hover:shadow-md",
     };
 
     const sizes = {
@@ -43,13 +35,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
-        className={cn(
-          baseStyles,
-          variants[variant],
-          sizes[size],
-          isLoading && "opacity-70 cursor-wait",
-          className
-        )}
+        className={cn(baseStyles, variants[variant], sizes[size], isLoading && "opacity-70 cursor-wait", className)}
         ref={ref}
         disabled={disabled || isLoading}
         aria-busy={isLoading}

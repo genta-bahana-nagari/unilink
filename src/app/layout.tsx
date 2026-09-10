@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import { PublicNavbar } from "@/components/layout/public-navbar";
 import { Footer } from "@/components/layout/footer";
-import { cn } from "@/lib/utils";
+import { DarkModeProvider } from "@/providers/dark-mode-provider";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,8 +24,10 @@ export const metadata: Metadata = {
     default: "UniLink - Crowdsourcing Platform",
     template: "%s | UniLink",
   },
+
   description:
     "UniLink connects organizations and researchers with skilled participants for events, research studies, and collaborative projects. Discover opportunities, apply, and make an impact.",
+
   keywords: [
     "crowdsourcing",
     "research",
@@ -33,21 +37,31 @@ export const metadata: Metadata = {
     "collaboration",
     "crowd-sourcing",
   ],
+
   authors: [{ name: "UniLink Team" }],
   creator: "UniLink",
   publisher: "UniLink",
+
   metadataBase: new URL("https://unilink-platform.com"),
+
   alternates: {
     canonical: "/",
   },
+
   openGraph: {
     title: "UniLink - Crowdsourcing Platform",
+
     description:
       "Connect with events, research, and collaboration opportunities tailored to your skills.",
+
     url: "https://unilink-platform.com",
+
     siteName: "UniLink",
+
     locale: "en_US",
+
     type: "website",
+
     images: [
       {
         url: "/images/og-image.jpg",
@@ -57,17 +71,23 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
+
     title: "UniLink - Crowdsourcing Platform",
+
     description:
       "Connect with events, research, and collaboration opportunities tailored to your skills.",
+
     creator: "@unilink",
     site: "@unilink",
   },
+
   robots: {
     index: true,
     follow: true,
+
     googleBot: {
       index: true,
       follow: true,
@@ -76,6 +96,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+
   verification: {
     google: "google-site-verification",
   },
@@ -83,28 +104,27 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html
       lang="en"
-      className={cn(
-        geistSans.variable,
-        geistMono.variable,
-        "h-full scroll-smooth antialiased",
-      )}
       suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        <a href="#main-content" className="skip-to-content">
-          Skip to main content
-        </a>
-        <PublicNavbar />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+      <body className="min-h-full bg-background text-foreground">
+        <DarkModeProvider>
+          <a href="#main-content" className="skip-to-content">
+            Skip to main content
+          </a>
+
+          <PublicNavbar />
+
+          <main id="main-content">{children}</main>
+
+          <Footer />
+        </DarkModeProvider>
       </body>
     </html>
   );
