@@ -21,6 +21,7 @@ import { publicNavigation, getNavigationByRole } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
+import { Modal } from "@/components/ui/modal";
 import { useDarkMode } from "@/providers/dark-mode-provider";
 
 export function PublicNavbar() {
@@ -30,6 +31,7 @@ export function PublicNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const { isDark, toggleDark } = useDarkMode();
 
@@ -124,6 +126,11 @@ export function PublicNavbar() {
             "dark:hover:bg-neutral-800",
           ],
     );
+
+  const handleLogoutConfirm = () => {
+    logout();
+    window.location.href = "/";
+  };
 
   return (
     <>
@@ -433,7 +440,7 @@ export function PublicNavbar() {
                         type="button"
                         onClick={() => {
                           setIsUserMenuOpen(false);
-                          logout();
+                          setIsLogoutModalOpen(true);
                         }}
                         className={cn(
                           "flex items-center gap-3",
@@ -630,7 +637,10 @@ export function PublicNavbar() {
 
               <button
                 type="button"
-                onClick={logout}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsLogoutModalOpen(true);
+                }}
                 className={cn(
                   "flex items-center gap-3",
                   "w-full",
@@ -700,6 +710,48 @@ export function PublicNavbar() {
           </button>
         </div>
       </div>
+
+      {/* =========================================================
+          LOGOUT CONFIRMATION MODAL
+          ========================================================= */}
+
+      <Modal
+        open={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+        size="sm"
+      >
+        <div className="p-6">
+          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 mb-4 mx-auto">
+            <FiLogOut className="w-6 h-6 text-red-600 dark:text-red-400" />
+          </div>
+
+          <h3 className="text-lg font-semibold text-foreground text-center mb-2">
+            Confirm Logout
+          </h3>
+
+          <p className="text-sm text-muted-foreground text-center mb-6">
+            Are you sure you want to log out? You will be redirected to the
+            homepage.
+          </p>
+
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              className="flex-1"
+              onClick={() => setIsLogoutModalOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="destructive"
+              className="flex-1"
+              onClick={handleLogoutConfirm}
+            >
+              Log Out
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 }
