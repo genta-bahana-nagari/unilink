@@ -11,8 +11,8 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
     const variants = {
       default: "bg-black text-white",
       success: "bg-black text-white",
-      warning: "bg-neutral-800 text-white",
-      danger: "bg-red-600 text-white",
+      warning: "bg-neutral-300 text-black dark:bg-neutral-600 dark:text-white",
+      danger: "bg-black text-white border border-white",
       info: "bg-black text-white",
       outline: "border border-black bg-transparent text-foreground",
     };

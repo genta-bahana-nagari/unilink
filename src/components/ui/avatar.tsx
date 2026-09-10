@@ -29,7 +29,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       <div
         ref={ref}
         className={cn(
-          "rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center font-semibold text-blue-600 flex-shrink-0 overflow-hidden",
+          "rounded-full bg-black dark:bg-white flex items-center justify-center font-semibold text-white dark:text-black flex-shrink-0 overflow-hidden",
           sizes[size],
           className
         )}
@@ -66,18 +66,18 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
     const remaining = childrenArray.length - max;
 
     return (
-      <div
-        ref={ref}
-        className={cn("flex -space-x-2", className)}
-        {...props}
-      >
-        {visibleChildren}
-        {remaining > 0 && (
-          <div className="h-10 w-10 rounded-full bg-slate-200 flex items-center justify-center text-xs font-medium text-slate-600 border-2 border-white">
-            +{remaining}
-          </div>
-        )}
-      </div>
+<div
+          ref={ref}
+          className={cn("flex -space-x-2", className)}
+          {...props}
+        >
+          {visibleChildren}
+          {remaining > 0 && (
+            <div className="h-10 w-10 rounded-full bg-black dark:bg-white flex items-center justify-center text-xs font-medium text-white dark:text-black border-2 border-white dark:border-neutral-800">
+              +{remaining}
+            </div>
+          )}
+        </div>
     );
   }
 );
