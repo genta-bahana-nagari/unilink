@@ -7,6 +7,7 @@ import { api } from "@/lib/mock-api";
 import { Announcement } from "@/types/announcement";
 import { useEffect, useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
+import { cn } from "@/lib/utils";
 
 export default function AnnouncementsPage() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
@@ -23,7 +24,7 @@ export default function AnnouncementsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="flex items-center justify-center min-h-[60vh] bg-background">
         <Spinner size="lg" />
       </div>
     );
@@ -44,11 +45,23 @@ export default function AnnouncementsPage() {
         {announcements.map((announcement) => (
           <Card
             key={announcement.id}
-            className="p-6 border-border hover:shadow-lg transition-all duration-300"
+            className={cn(
+              "p-6",
+              "border-border",
+              "bg-card",
+              "hover:shadow-lg",
+              "transition-all duration-300",
+              "hover:border-primary/50",
+              "dark:hover:border-primary/50"
+            )}
           >
             <div className="flex items-center gap-2 mb-4">
-              <div className="p-2 bg-brand-50 rounded-lg">
-                <FiBell size={16} className="text-brand-600" />
+              <div className={cn(
+                "p-2 rounded-lg",
+                "bg-primary/10",
+                "dark:bg-primary/10"
+              )}>
+                <FiBell size={16} className="text-primary" />
               </div>
               <Badge
                 variant={
