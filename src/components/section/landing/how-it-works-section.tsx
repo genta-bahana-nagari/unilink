@@ -49,8 +49,8 @@ export function HowItWorksSection() {
 
           {STEPS.map((step, index) => (
             <div key={index} className="relative z-10">
-              <Card className="p-8 text-center bg-white dark:bg-neutral-950 border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white hover:shadow-lg transition-all duration-300">
-                <div className="relative inline-block mb-6">
+              <Card className="p-8 text-center bg-white dark:bg-neutral-950 border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white hover:shadow-lg transition-all duration-300 flex flex-col">
+                <div className="relative inline-block mb-6 mx-auto">
                   <div className="w-16 h-16 rounded-2xl bg-black flex items-center justify-center shadow-lg shadow-neutral-200 dark:shadow-neutral-800">
                     <step.icon className="w-8 h-8 text-white" />
                   </div>
@@ -61,7 +61,7 @@ export function HowItWorksSection() {
                 <h3 className="text-xl font-semibold text-black dark:text-white mb-3">
                   {step.title}
                 </h3>
-                <p className="text-neutral-500 dark:text-neutral-400">{step.description}</p>
+                <p className="text-neutral-500 dark:text-neutral-400 flex-1">{step.description}</p>
               </Card>
             </div>
           ))}

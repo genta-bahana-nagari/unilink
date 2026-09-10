@@ -7,8 +7,6 @@ import {
   FiTarget,
   FiZap,
   FiShield,
-  FiGlobe,
-  FiTrendingUp,
 } from "react-icons/fi";
 import { cn } from "@/lib/utils";
 
@@ -60,11 +58,11 @@ export function FeaturesSection() {
           {FEATURES.map((feature, index) => (
             <Card
               key={index}
-              className="p-6 border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white hover:shadow-lg transition-all duration-300 group"
+              className="p-6 border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white hover:shadow-lg transition-all duration-300 group flex flex-col"
             >
               <div
                 className={cn(
-                  "w-12 h-12 rounded-xl bg-black flex items-center justify-center mb-4 group-hover:scale-110 transition-transform",
+                  "w-12 h-12 rounded-xl bg-black flex items-center justify-center mb-4 group-hover:scale-110 transition-transform flex-shrink-0",
                 )}
               >
                 <feature.icon className="w-6 h-6 text-white" />
@@ -72,7 +70,7 @@ export function FeaturesSection() {
               <h3 className="text-lg font-semibold text-black dark:text-white mb-2">
                 {feature.title}
               </h3>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400 flex-1">
                 {feature.description}
               </p>
             </Card>

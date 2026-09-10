@@ -15,7 +15,7 @@ export function CTASection() {
           Join thousands of researchers, organizers, and participants who are
           already collaborating on meaningful projects.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link href="/auth/register">
             <Button
               size="lg"
@@ -29,7 +29,7 @@ export function CTASection() {
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-black w-full sm:w-auto"
+              className="border-neutral-300 text-white hover:bg-white hover:text-black w-full sm:w-auto"
             >
               Browse Opportunities
             </Button>

@@ -49,7 +49,7 @@ export function TestimonialsSection() {
           {TESTIMONIALS.map((testimonial, index) => (
             <Card
               key={index}
-              className="p-6 border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white hover:shadow-lg transition-all duration-300"
+              className="p-6 border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white hover:shadow-lg transition-all duration-300 flex flex-col"
             >
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
@@ -60,12 +60,12 @@ export function TestimonialsSection() {
                 ))}
               </div>
 
-              <p className="text-neutral-500 dark:text-neutral-400 mb-6 italic">
+              <p className="text-neutral-500 dark:text-neutral-400 mb-6 italic flex-1">
                 &ldquo;{testimonial.content}&rdquo;
               </p>
 
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white font-bold">
+                <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white font-bold flex-shrink-0">
                   {testimonial.name.charAt(0)}
                 </div>
                 <div>

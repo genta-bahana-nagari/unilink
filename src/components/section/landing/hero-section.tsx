@@ -84,7 +84,7 @@ export function HeroSection() {
 
           <div
             className={cn(
-              "flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center",
+              "flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center",
               "mb-14 sm:mb-16",
               "transition-all duration-500 delay-300 transform",
               isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",

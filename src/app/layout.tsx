@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { PublicNavbar } from "@/components/layout/public-navbar";
 import { Footer } from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
-import { DarkModeProvider } from "@/providers/dark-mode-provider";
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -98,16 +98,16 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <DarkModeProvider>
-          <a href="#main-content" className="skip-to-content">
-            Skip to main content
-          </a>
-          <PublicNavbar />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </DarkModeProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <a href="#main-content" className="skip-to-content">
+              Skip to main content
+            </a>
+            <PublicNavbar />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </ThemeProvider>
       </body>
     </html>
   );

@@ -71,8 +71,8 @@ export function FeaturedOpportunities() {
               <div className="space-y-4">
                 {featuredEvents.map((event) => (
                   <Link key={event.id} href={`/events/${event.id}`}>
-                    <Card className="group p-5 hover:shadow-lg transition-all duration-300 hover:border-black dark:hover:border-white cursor-pointer">
-                      <div className="flex items-start gap-4">
+                    <Card className="group p-5 hover:shadow-lg transition-all duration-300 hover:border-black dark:hover:border-white cursor-pointer flex flex-col">
+                      <div className="flex items-start gap-4 flex-1">
                         <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white font-semibold text-lg flex-shrink-0">
                           {event.title.charAt(0).toUpperCase()}
                         </div>
@@ -99,7 +99,7 @@ export function FeaturedOpportunities() {
                             </span>
                           </div>
                         </div>
-                        <FiChevronRight className="w-5 h-5 text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors flex-shrink-0" />
+                        <FiChevronRight className="w-5 h-5 text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors flex-shrink-0 mt-1" />
                       </div>
                     </Card>
                   </Link>
@@ -150,8 +150,8 @@ export function FeaturedOpportunities() {
               <div className="space-y-4">
                 {featuredResearch.map((r) => (
                   <Link key={r.id} href={`/research/${r.id}`}>
-                    <Card className="group p-5 hover:shadow-lg transition-all duration-300 hover:border-black dark:hover:border-white cursor-pointer">
-                      <div className="flex items-start gap-4">
+                    <Card className="group p-5 hover:shadow-lg transition-all duration-300 hover:border-black dark:hover:border-white cursor-pointer flex flex-col">
+                      <div className="flex items-start gap-4 flex-1">
                         <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white font-semibold text-lg flex-shrink-0">
                           {r.title.charAt(0).toUpperCase()}
                         </div>
@@ -176,7 +176,7 @@ export function FeaturedOpportunities() {
                             </span>
                           </div>
                         </div>
-                        <FiChevronRight className="w-5 h-5 text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors flex-shrink-0" />
+                        <FiChevronRight className="w-5 h-5 text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors flex-shrink-0 mt-1" />
                       </div>
                     </Card>
                   </Link>

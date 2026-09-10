@@ -63,22 +63,22 @@ export function PublicNavbar() {
     <>
       <nav
         className={cn(
-          "sticky top-0 z-50 w-full transition-all duration-300",
+          "sticky top-3 sm:top-4 z-50 w-full transition-all duration-300",
           isScrolled
-            ? "bg-white/90 dark:bg-neutral-950/90 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 shadow-sm"
-            : "bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800",
+            ? "bg-white/80 dark:bg-neutral-950/80 backdrop-blur-xl border border-neutral-200 dark:border-neutral-800 shadow-lg"
+            : "bg-white/60 dark:bg-neutral-950/60 backdrop-blur-xl border border-neutral-200 dark:border-neutral-800 shadow-md",
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="mx-auto max-w-fit px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-14 sm:h-16 rounded-full">
             <Link
               href={isAuthenticated && role === "ADMIN" ? "/admin" : "/"}
               className="flex items-center gap-3 shrink-0"
             >
-              <div className="w-10 h-10 rounded-xl bg-black flex items-center justify-center">
-                <span className="text-white font-bold text-lg">U</span>
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black flex items-center justify-center">
+                <span className="text-white font-bold text-sm">U</span>
               </div>
-              <span className="text-xl sm:text-2xl font-bold tracking-tight text-black dark:text-white">
+              <span className="text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white">
                 UniLink
               </span>
             </Link>
@@ -90,37 +90,36 @@ export function PublicNavbar() {
                   href={item.href}
                   className={cn(
                     navLinkClasses(item.href),
-                    "px-3 py-2 rounded-lg",
+                    "px-3 py-1.5 rounded-full text-sm",
                   )}
                 >
-                  <item.icon size={18} />
-                  {item.label}
+                  <item.icon size={16} />
                 </Link>
               ))}
             </div>
 
-            <div className="hidden md:flex items-center gap-3 lg:gap-4">
+            <div className="hidden md:flex items-center gap-2 lg:gap-3">
               <div className="relative">
-                <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+                <FiSearch className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-400" />
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-48 lg:w-64 pl-9 pr-4 py-2 text-sm rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 focus:bg-white dark:focus:bg-neutral-900 focus:border-black dark:focus:border-white focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 outline-none transition-all"
+                  className="w-36 lg:w-48 pl-8 pr-3 py-1.5 text-sm rounded-full border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 focus:bg-white dark:focus:bg-neutral-900 focus:border-black dark:focus:border-white focus:ring-2 focus:ring-black/10 dark:focus:ring-white/10 outline-none transition-all"
                 />
               </div>
 
               <button
                 onClick={toggleDark}
-                className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-neutral-500 dark:text-neutral-400"
+                className="p-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-neutral-600 dark:text-neutral-400"
                 aria-label="Toggle dark mode"
               >
-                {isDark ? <FiSun size={18} /> : <FiMoon size={18} />}
+                {isDark ? <FiSun size={16} /> : <FiMoon size={16} />}
               </button>
 
               {isAuthenticated && (
-                <button className="relative p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-neutral-500 dark:text-neutral-400">
-                  <FiBell size={18} />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-black rounded-full" />
+                <button className="relative p-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-neutral-600 dark:text-neutral-400">
+                  <FiBell size={16} />
+                  <span className="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-black rounded-full" />
                 </button>
               )}
 
@@ -128,7 +127,7 @@ export function PublicNavbar() {
                 <div className="relative">
                   <button
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                    className="flex items-center gap-2 px-2 py-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                   >
                     <Avatar
                       fallback={user?.name?.[0]?.toUpperCase() || "U"}
@@ -138,13 +137,13 @@ export function PublicNavbar() {
                       {user?.name || "User"}
                     </span>
                     <FiChevronDown
-                      size={16}
+                      size={14}
                       className="text-neutral-400 dark:text-neutral-500"
                     />
                   </button>
 
                   {isUserMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-neutral-950 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-800 py-1 z-50">
+                    <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-neutral-950 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 py-1 z-50">
                       <Link
                         href="/profile"
                         className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
@@ -167,7 +166,7 @@ export function PublicNavbar() {
                   )}
                 </div>
               ) : (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
                   <Link href="/auth/login">
                     <Button variant="ghost" size="sm">
                       Sign In
@@ -184,29 +183,29 @@ export function PublicNavbar() {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-foreground"
+              className="md:hidden p-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-foreground"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+              {isMobileMenuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
             </button>
           </div>
         </div>
 
         <div
           className={cn(
-            "md:hidden fixed inset-x-0 top-16 sm:top-20 bg-white dark:bg-neutral-950/95 backdrop-blur-lg border-b border-neutral-200 dark:border-neutral-800 shadow-lg transition-all duration-300 overflow-hidden",
+            "md:hidden fixed inset-x-3 sm:inset-x-6 top-20 sm:top-24 bg-white dark:bg-neutral-950/95 backdrop-blur-xl border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-2xl shadow-lg transition-all duration-300 overflow-hidden z-40",
             isMobileMenuOpen
-              ? "max-h-[calc(100vh-4rem)] opacity-100"
+              ? "max-h-[calc(100vh-8rem)] opacity-100"
               : "max-h-0 opacity-0",
           )}
         >
-          <div className="px-4 py-3 space-y-1 overflow-y-auto max-h-[calc(100vh-4rem)]">
+          <div className="px-4 py-3 space-y-1 overflow-y-auto max-h-[calc(100vh-8rem)]">
             <div className="relative mb-3">
               <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
               <input
                 type="text"
                 placeholder="Search..."
-                className="w-full pl-9 pr-4 py-3 text-sm rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 focus:bg-white dark:focus:bg-neutral-900 focus:border-black outline-none transition-all"
+                className="w-full pl-9 pr-4 py-2.5 text-sm rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 focus:bg-white dark:focus:bg-neutral-900 focus:border-black outline-none transition-all"
               />
             </div>
 
@@ -273,7 +272,7 @@ export function PublicNavbar() {
 
       {isMobileMenuOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
