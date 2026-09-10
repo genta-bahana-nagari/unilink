@@ -1,82 +1,143 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, useCallback } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-type Theme = "dark" | "light" | "system";
-
-interface DarkModeContextType {
+type DarkModeContextType = {
   isDark: boolean;
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
   toggleDark: () => void;
-}
+  setDark: (dark: boolean) => void;
+};
 
-export const DarkModeContext = createContext<DarkModeContextType>({
-  isDark: false,
-  theme: "system",
-  setTheme: () => {},
-  toggleDark: () => {},
-});
+const DarkModeContext = createContext<DarkModeContextType | undefined>(
+  undefined,
+);
 
-export function DarkModeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window === "undefined") return "system";
-    try {
-      return (localStorage.getItem("theme") as Theme) || "system";
-    } catch {
-      return "system";
-    }
-  });
+const STORAGE_KEY = "unilink-theme";
+
+export function DarkModeProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  const getSystemTheme = useCallback(() => {
-    if (typeof window === "undefined") return "light";
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }, []);
-
-  const applyTheme = useCallback((t: Theme) => {
+  /*
+   * Apply the theme to <html>.
+   *
+   * Tailwind's `dark:` classes will react to this class.
+   */
+  const applyTheme = useCallback((dark: boolean) => {
     const root = document.documentElement;
-    const resolved = t === "system" ? getSystemTheme() : t;
-    if (resolved === "dark") {
+
+    if (dark) {
       root.classList.add("dark");
+      root.style.colorScheme = "dark";
     } else {
       root.classList.remove("dark");
+      root.style.colorScheme = "light";
     }
-    setIsDark(resolved === "dark");
-  }, [getSystemTheme]);
-
-  useEffect(() => {
-    applyTheme(theme);
-  }, [theme, applyTheme]);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handler = () => {
-      if (theme === "system") applyTheme("system");
-    };
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, [theme, applyTheme]);
-
-  const setTheme = useCallback((t: Theme) => {
-    setThemeState(t);
-    try {
-      localStorage.setItem("theme", t);
-    } catch {}
   }, []);
 
+  /*
+   * Load saved theme on first client render.
+   */
+  useEffect(() => {
+    const savedTheme = localStorage.getItem(STORAGE_KEY);
+
+    if (savedTheme === "dark") {
+      setIsDark(true);
+      applyTheme(true);
+    } else if (savedTheme === "light") {
+      setIsDark(false);
+      applyTheme(false);
+    } else {
+      /*
+       * No saved preference:
+       * use the user's system preference.
+       */
+      const systemDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+
+      setIsDark(systemDark);
+      applyTheme(systemDark);
+    }
+
+    setMounted(true);
+  }, [applyTheme]);
+
+  /*
+   * Toggle theme.
+   */
   const toggleDark = useCallback(() => {
-    const newTheme = isDark ? "light" : "dark";
-    setTheme(newTheme);
-  }, [isDark, setTheme]);
+    setIsDark((current) => {
+      const next = !current;
+
+      applyTheme(next);
+      localStorage.setItem(STORAGE_KEY, next ? "dark" : "light");
+
+      return next;
+    });
+  }, [applyTheme]);
+
+  /*
+   * Explicitly set theme.
+   */
+  const setDark = useCallback(
+    (dark: boolean) => {
+      setIsDark(dark);
+      applyTheme(dark);
+      localStorage.setItem(STORAGE_KEY, dark ? "dark" : "light");
+    },
+    [applyTheme],
+  );
+
+  /*
+   * Prevent hydration mismatch from causing the icon
+   * to flash between moon/sun.
+   */
+  if (!mounted) {
+    return (
+      <DarkModeContext.Provider
+        value={{
+          isDark: false,
+          toggleDark,
+          setDark,
+        }}
+      >
+        {children}
+      </DarkModeContext.Provider>
+    );
+  }
 
   return (
-    <DarkModeContext.Provider value={{ isDark, theme, setTheme, toggleDark }}>
+    <DarkModeContext.Provider
+      value={{
+        isDark,
+        toggleDark,
+        setDark,
+      }}
+    >
       {children}
     </DarkModeContext.Provider>
   );
 }
 
 export function useDarkMode() {
-  return useContext(DarkModeContext);
+  const context = useContext(DarkModeContext);
+
+  if (!context) {
+    throw new Error(
+      "useDarkMode must be used inside a DarkModeProvider",
+    );
+  }
+
+  return context;
 }

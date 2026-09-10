@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #0a0a0a;
@@ -17,18 +19,22 @@
   --border-hover: #c0c0c0;
   --muted: #f5f5f5;
   --muted-foreground: #666666;
+
   --card: #ffffff;
   --popover: #ffffff;
 
   --success: #000000;
   --success-bg: #f0f0f0;
   --success-border: #d0d0d0;
+
   --warning: #444444;
   --warning-bg: #f0f0f0;
   --warning-border: #d0d0d0;
+
   --danger: #cc0000;
   --danger-bg: #fef0f0;
   --danger-border: #f0c0c0;
+
   --info: #000000;
   --info-bg: #f0f0f0;
   --info-border: #d0d0d0;
@@ -49,17 +55,22 @@
 
   --border: #2a2a2a;
   --border-hover: #404040;
+
   --muted: #151515;
   --muted-foreground: #999999;
+
   --card: #151515;
   --popover: #151515;
 
   --success-bg: #1a1a1a;
   --success-border: #333333;
+
   --warning-bg: #1a1a1a;
   --warning-border: #333333;
+
   --danger-bg: #1a0a0a;
   --danger-border: #332222;
+
   --info-bg: #1a1a1a;
   --info-border: #333333;
 }
@@ -67,26 +78,35 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-primary-light: var(--primary-light);
   --color-primary-lighter: var(--primary-lighter);
+
   --color-secondary: var(--secondary);
+
   --color-border: var(--border);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+
   --color-card: var(--card);
+
   --color-success: var(--success);
   --color-success-bg: var(--success-bg);
+
   --color-warning: var(--warning);
   --color-warning-bg: var(--warning-bg);
+
   --color-danger: var(--danger);
   --color-danger-bg: var(--danger-bg);
+
   --color-info: var(--info);
   --color-info-bg: var(--info-bg);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-  --radius: var(--radius);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 *,
@@ -102,20 +122,38 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+html,
 body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
-  font-size: var(--text-base);
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: 1rem;
   line-height: 1.5;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
 :focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
-  border-radius: var(--radius-sm);
+  border-radius: 0.5rem;
 }
 
 :focus:not(:focus-visible) {
@@ -138,7 +176,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--border);
-  border-radius: var(--radius-full);
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -160,11 +198,15 @@ body {
   position: absolute;
   top: -40px;
   left: 0;
+
   background: var(--primary);
-  color: white;
-  padding: var(--space-2) var(--space-4);
+  color: var(--background);
+
+  padding: 0.5rem 1rem;
+
   z-index: 100;
-  transition: top var(--transition-fast);
+
+  transition: top 150ms ease;
 }
 
 .skip-to-content:focus {
@@ -174,15 +216,15 @@ body {
 .progress-bar {
   height: 4px;
   background: var(--muted);
-  border-radius: var(--radius-full);
+  border-radius: 999px;
   overflow: hidden;
 }
 
 .progress-bar-fill {
   height: 100%;
   background: var(--primary);
-  border-radius: var(--radius-full);
-  transition: width var(--transition-normal);
+  border-radius: 999px;
+  transition: width 300ms ease;
 }
 
 .skeleton {
@@ -192,14 +234,22 @@ body {
     var(--border) 50%,
     var(--muted) 75%
   );
+
   background-size: 200% 100%;
+
   animation: skeleton-loading 1.5s ease-in-out infinite;
-  border-radius: var(--radius-sm);
+
+  border-radius: 0.5rem;
 }
 
 @keyframes skeleton-loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .line-clamp-2 {
@@ -216,5 +266,10 @@ body {
   overflow: hidden;
 }
 
-.text-balance { text-wrap: balance; }
-.text-pretty { text-wrap: pretty; }
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
