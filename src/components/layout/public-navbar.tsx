@@ -13,6 +13,7 @@ import {
   FiMoon,
   FiSun,
   FiChevronDown,
+  FiGrid,
 } from "react-icons/fi";
 
 import { useAuth } from "@/hooks/use-auth";
@@ -36,7 +37,21 @@ export function PublicNavbar() {
   const { isDark, toggleDark } = useDarkMode();
 
   const navigation =
-    isAuthenticated && role ? getNavigationByRole(role) : publicNavigation;
+    isAuthenticated && role
+      ? getNavigationByRole(role)
+      : publicNavigation;
+
+  /*
+   * Get the dashboard URL based on the authenticated user's role.
+   */
+  const dashboardHref =
+    role === "ADMIN"
+      ? "/admin"
+      : role === "ORGANIZER"
+        ? "/organizer"
+        : role === "PARTICIPANT"
+          ? "/participant"
+          : "/";
 
   /* --------------------------------
      Scroll detection
@@ -141,31 +156,15 @@ export function PublicNavbar() {
       <div className="sticky top-4 z-50 w-full px-3 sm:px-6 pointer-events-none">
         <nav
           className={cn(
-            /* IMPORTANT:
-               The navbar itself is the capsule.
-               It is NOT full width.
-            */
             "mx-auto",
             "w-fit max-w-[calc(100vw-1.5rem)]",
-
-            /* Capsule */
             "rounded-full",
-
-            /* Layout */
             "flex items-center",
-
-            /* Border */
             "border",
-
-            /* Glass */
             "bg-white/85 dark:bg-neutral-950/85",
             "backdrop-blur-2xl",
-
-            /* Shadow */
             "shadow-[0_8px_30px_rgba(0,0,0,0.08)]",
             "dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)]",
-
-            /* Animation */
             "transition-all duration-300",
 
             isScrolled
@@ -177,7 +176,6 @@ export function PublicNavbar() {
                 ]
               : ["border-neutral-200/70", "dark:border-neutral-800/70"],
 
-            /* Keep navbar clickable */
             "pointer-events-auto",
           )}
         >
@@ -194,7 +192,7 @@ export function PublicNavbar() {
                 ===================================================== */}
 
             <Link
-              href={isAuthenticated && role === "ADMIN" ? "/admin" : "/"}
+              href={dashboardHref}
               className="flex items-center gap-2.5 shrink-0 px-2"
             >
               <div
@@ -231,7 +229,6 @@ export function PublicNavbar() {
                 >
                   <item.icon size={17} />
 
-                  {/* Tooltip */}
                   <span
                     className={cn(
                       "absolute",
@@ -280,24 +277,18 @@ export function PublicNavbar() {
                     "text-sm",
                     "text-foreground",
                     "placeholder:text-neutral-400",
-
                     "bg-neutral-100/80",
                     "dark:bg-neutral-900/80",
-
                     "border border-transparent",
                     "focus:border-neutral-300",
                     "dark:focus:border-neutral-700",
-
                     "focus:bg-white",
                     "dark:focus:bg-neutral-900",
-
                     "focus:outline-none",
                     "focus:ring-2",
                     "focus:ring-black/5",
                     "dark:focus:ring-white/10",
-
                     "transition-all duration-200",
-
                     "focus:w-40 lg:focus:w-52",
                   )}
                 />
@@ -364,7 +355,9 @@ export function PublicNavbar() {
                   <button
                     type="button"
                     data-user-menu-button
-                    onClick={() => setIsUserMenuOpen((current) => !current)}
+                    onClick={() =>
+                      setIsUserMenuOpen((current) => !current)
+                    }
                     className={cn(
                       "flex items-center gap-2",
                       "h-10",
@@ -417,6 +410,27 @@ export function PublicNavbar() {
                         "z-[100]",
                       )}
                     >
+                      {/* Dashboard */}
+                      <Link
+                        href={dashboardHref}
+                        onClick={() => setIsUserMenuOpen(false)}
+                        className={cn(
+                          "flex items-center gap-3",
+                          "w-full",
+                          "px-3 py-2.5",
+                          "rounded-xl",
+                          "text-sm",
+                          "text-foreground",
+                          "hover:bg-neutral-100",
+                          "dark:hover:bg-neutral-800",
+                          "transition-colors",
+                        )}
+                      >
+                        <FiGrid size={16} />
+                        Dashboard
+                      </Link>
+
+                      {/* Profile */}
                       <Link
                         href="/profile"
                         onClick={() => setIsUserMenuOpen(false)}
@@ -436,6 +450,7 @@ export function PublicNavbar() {
                         Profile
                       </Link>
 
+                      {/* Logout */}
                       <button
                         type="button"
                         onClick={() => {
@@ -491,7 +506,9 @@ export function PublicNavbar() {
 
             <button
               type="button"
-              onClick={() => setIsMobileMenuOpen((current) => !current)}
+              onClick={() =>
+                setIsMobileMenuOpen((current) => !current)
+              }
               aria-label="Toggle menu"
               aria-expanded={isMobileMenuOpen}
               className={cn(
@@ -506,7 +523,11 @@ export function PublicNavbar() {
                 "transition-colors",
               )}
             >
-              {isMobileMenuOpen ? <FiX size={21} /> : <FiMenu size={21} />}
+              {isMobileMenuOpen ? (
+                <FiX size={21} />
+              ) : (
+                <FiMenu size={21} />
+              )}
             </button>
           </div>
         </nav>
@@ -534,23 +555,17 @@ export function PublicNavbar() {
           "md:hidden",
           "top-[5.25rem]",
           "left-3 right-3 sm:left-6 sm:right-6",
-
           "rounded-3xl",
           "border",
           "border-neutral-200",
           "dark:border-neutral-800",
-
           "bg-white/95",
           "dark:bg-neutral-950/95",
-
           "backdrop-blur-2xl",
-
           "shadow-2xl",
           "shadow-black/10",
           "dark:shadow-black/40",
-
           "overflow-hidden",
-
           "transition-all duration-300 ease-out",
 
           isMobileMenuOpen
@@ -560,7 +575,12 @@ export function PublicNavbar() {
                 "pointer-events-auto",
                 "max-h-[calc(100vh-6rem)]",
               ]
-            : ["opacity-0", "-translate-y-3", "pointer-events-none", "max-h-0"],
+            : [
+                "opacity-0",
+                "-translate-y-3",
+                "pointer-events-none",
+                "max-h-0",
+              ],
         )}
       >
         <div className="p-4 overflow-y-auto max-h-[calc(100vh-6rem)]">
@@ -613,8 +633,20 @@ export function PublicNavbar() {
           {/* Mobile Authentication */}
           {isAuthenticated ? (
             <div className="space-y-1">
+              {/* Dashboard */}
+              <Link
+                href={dashboardHref}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={mobileNavLinkClasses(dashboardHref)}
+              >
+                <FiGrid size={20} />
+                <span>Dashboard</span>
+              </Link>
+
+              {/* Profile */}
               <Link
                 href="/profile"
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={cn(
                   "flex items-center gap-3",
                   "w-full",
@@ -635,6 +667,7 @@ export function PublicNavbar() {
                 <span>{user?.name || "Profile"}</span>
               </Link>
 
+              {/* Logout */}
               <button
                 type="button"
                 onClick={() => {
@@ -706,7 +739,9 @@ export function PublicNavbar() {
           >
             {isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
 
-            <span>{isDark ? "Light Mode" : "Dark Mode"}</span>
+            <span>
+              {isDark ? "Light Mode" : "Dark Mode"}
+            </span>
           </button>
         </div>
       </div>
@@ -742,6 +777,7 @@ export function PublicNavbar() {
             >
               Cancel
             </Button>
+
             <Button
               variant="destructive"
               className="flex-1"
