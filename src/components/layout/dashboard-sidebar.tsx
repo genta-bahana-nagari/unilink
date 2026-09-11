@@ -4,6 +4,7 @@ import { NavigationItem } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FiUser } from "react-icons/fi";
 
 interface DashboardSidebarProps {
   items: NavigationItem[];
@@ -18,10 +19,12 @@ export function DashboardSidebar({ items, role }: DashboardSidebarProps) {
       <div className="p-6 border-b border-border">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-md shadow-brand-200">
-            <span className="text-white font-bold text-lg">C</span>
+            <span className="text-black font-bold text-lg">
+              <FiUser />
+            </span>
           </div>
           <div>
-            <h1 className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text text-transparent">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text text-black">
               UniLink
             </h1>
             <p className="text-sm text-muted-foreground capitalize">{role}</p>
