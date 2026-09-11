@@ -21,12 +21,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "UniLink - Crowdsourcing Platform",
-    template: "%s | UniLink",
+    default: "Fivo - Crowdsourcing Platform",
+    template: "%s | Fivo",
   },
 
   description:
-    "UniLink connects organizations and researchers with skilled participants for events, research studies, and collaborative projects. Discover opportunities, apply, and make an impact.",
+    "Fivo connects organizations and researchers with skilled participants for events, research studies, and collaborative projects. Discover opportunities, apply, and make an impact.",
 
   keywords: [
     "crowdsourcing",
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     "crowd-sourcing",
   ],
 
-  authors: [{ name: "UniLink Team" }],
-  creator: "UniLink",
-  publisher: "UniLink",
+  authors: [{ name: "Fivo Team" }],
+  creator: "Fivo",
+  publisher: "Fivo",
 
   metadataBase: new URL("https://unilink-platform.com"),
 
@@ -49,14 +49,14 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "UniLink - Crowdsourcing Platform",
+    title: "Fivo - Crowdsourcing Platform",
 
     description:
       "Connect with events, research, and collaboration opportunities tailored to your skills.",
 
     url: "https://unilink-platform.com",
 
-    siteName: "UniLink",
+    siteName: "Fivo",
 
     locale: "en_US",
 
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
         url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "UniLink - Crowdsourcing Platform",
+        alt: "Fivo - Crowdsourcing Platform",
       },
     ],
   },
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "UniLink - Crowdsourcing Platform",
+    title: "Fivo - Crowdsourcing Platform",
 
     description:
       "Connect with events, research, and collaboration opportunities tailored to your skills.",
@@ -118,12 +118,7 @@ export default function RootLayout({
           <a href="#main-content" className="skip-to-content">
             Skip to main content
           </a>
-
-          <PublicNavbar />
-
           <main id="main-content">{children}</main>
-
-          <Footer />
         </DarkModeProvider>
       </body>
     </html>
