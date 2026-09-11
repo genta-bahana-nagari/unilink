@@ -192,7 +192,7 @@ export function PublicNavbar() {
                 ===================================================== */}
 
             <Link
-              href={dashboardHref}
+              href="/"
               className="flex items-center gap-2.5 shrink-0 px-2"
             >
               <div
