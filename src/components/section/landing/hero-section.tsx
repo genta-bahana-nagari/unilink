@@ -325,7 +325,7 @@ export function HeroSection() {
                   "transition-all duration-300",
                 )}
               >
-                Explore Projects
+                Explore Eventss
               </Button>
             </Link>
           </div>
