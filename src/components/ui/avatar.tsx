@@ -13,7 +13,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
   ({ src, alt, fallback, size = "md", className, ...props }, ref) => {
     const [hasError, setHasError] = useState(false);
-    
+
     const sizes = {
       sm: "h-8 w-8 text-xs",
       md: "h-10 w-10 text-sm",
@@ -21,9 +21,14 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
       xl: "h-16 w-16 text-xl",
     };
 
-    const initials = fallback 
-      ? fallback.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
-      : "U";
+    const initials = fallback
+      ? fallback
+          .split(" ")
+          .map((n) => n[0])
+          .join("")
+          .toUpperCase()
+          .slice(0, 2)
+      : "F";
 
     return (
       <div
@@ -31,7 +36,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         className={cn(
           "rounded-full bg-black dark:bg-white flex items-center justify-center font-semibold text-white dark:text-black flex-shrink-0 overflow-hidden",
           sizes[size],
-          className
+          className,
         )}
         {...props}
       >
@@ -49,7 +54,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         )}
       </div>
     );
-  }
+  },
 );
 Avatar.displayName = "Avatar";
 
@@ -66,19 +71,15 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
     const remaining = childrenArray.length - max;
 
     return (
-<div
-          ref={ref}
-          className={cn("flex -space-x-2", className)}
-          {...props}
-        >
-          {visibleChildren}
-          {remaining > 0 && (
-            <div className="h-10 w-10 rounded-full bg-black dark:bg-white flex items-center justify-center text-xs font-medium text-white dark:text-black border-2 border-white dark:border-neutral-800">
-              +{remaining}
-            </div>
-          )}
-        </div>
+      <div ref={ref} className={cn("flex -space-x-2", className)} {...props}>
+        {visibleChildren}
+        {remaining > 0 && (
+          <div className="h-10 w-10 rounded-full bg-black dark:bg-white flex items-center justify-center text-xs font-medium text-white dark:text-black border-2 border-white dark:border-neutral-800">
+            +{remaining}
+          </div>
+        )}
+      </div>
     );
-  }
+  },
 );
 AvatarGroup.displayName = "AvatarGroup";

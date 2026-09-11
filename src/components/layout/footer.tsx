@@ -19,10 +19,10 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-black flex items-center justify-center">
-                <span className="text-white font-bold text-lg">U</span>
+                <span className="text-white font-bold text-lg">F</span>
               </div>
               <span className="text-xl font-bold tracking-tight text-black dark:text-white">
-                UniLink
+                Fivo
               </span>
             </div>
             <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
@@ -164,7 +164,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
-              © {currentYear} UniLink. All rights reserved.
+              © {currentYear} Fivo. All rights reserved.
             </p>
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
               Built for crowds that matter.

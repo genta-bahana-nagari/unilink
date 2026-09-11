@@ -224,9 +224,9 @@ export function HeroSection() {
                 : "translate-y-8 opacity-0",
             )}
           >
-            UniLink connects organizations with skilled participants for
-            research studies, events, and impactful collaborations. Join
-            thousands making a difference.
+            Fivo connects organizations with skilled participants for research
+            studies, events, and impactful collaborations. Join thousands making
+            a difference.
           </p>
 
           {/* =================================================

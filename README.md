@@ -1,8 +1,8 @@
-# UniLink - Crowdsourcing Platform
+# Fivo - Crowdsourcing Platform
 
 > **Connect. Collaborate. Create Impact.**
 
-UniLink is a modern, professional crowdsourcing platform built with Next.js 16, React 19, and Tailwind CSS 4. It connects organizations, researchers, and skilled participants for research studies, events, and impactful collaborations.
+Fivo is a modern, professional crowdsourcing platform built with Next.js 16, React 19, and Tailwind CSS 4. It connects organizations, researchers, and skilled participants for research studies, events, and impactful collaborations.
 
 ## Features
 

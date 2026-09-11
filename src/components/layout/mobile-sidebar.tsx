@@ -42,7 +42,7 @@ export function MobileSidebar({
             </div>
             <div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text text-transparent">
-                UniLink
+                Fivo
               </h1>
               <p className="text-sm text-muted-foreground capitalize">{role}</p>
             </div>

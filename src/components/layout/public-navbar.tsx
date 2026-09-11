@@ -207,12 +207,12 @@ export function PublicNavbar() {
                 )}
               >
                 <span className="text-white dark:text-black font-bold text-sm">
-                  U
+                  F
                 </span>
               </div>
 
               <span className="text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white">
-                UniLink
+                Fivo
               </span>
             </Link>
 
@@ -376,7 +376,7 @@ export function PublicNavbar() {
                     )}
                   >
                     <Avatar
-                      fallback={user?.name?.[0]?.toUpperCase() || "U"}
+                      fallback={user?.name?.[0]?.toUpperCase() || "F"}
                       size="sm"
                     />
 
@@ -628,7 +628,7 @@ export function PublicNavbar() {
                 )}
               >
                 <Avatar
-                  fallback={user?.name?.[0]?.toUpperCase() || "U"}
+                  fallback={user?.name?.[0]?.toUpperCase() || "F"}
                   size="sm"
                 />
 

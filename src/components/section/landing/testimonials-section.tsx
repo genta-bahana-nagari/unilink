@@ -9,7 +9,7 @@ const TESTIMONIALS = [
     name: "Dr. Sarah Chen",
     role: "Research Lead, Stanford University",
     content:
-      "UniLink helped us recruit 200 participants for our climate study in just two weeks. The quality of volunteers was exceptional.",
+      "Fivo helped us recruit 200 participants for our climate study in just two weeks. The quality of volunteers was exceptional.",
     rating: 5,
   },
   {
@@ -40,8 +40,7 @@ export function TestimonialsSection() {
             Trusted by Organizations Worldwide
           </h2>
           <p className="text-lg text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto">
-            See what our community has to say about their experience with
-            UniLink.
+            See what our community has to say about their experience with Fivo.
           </p>
         </div>
 

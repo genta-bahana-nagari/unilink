@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "UniLink",
+  name: "Fivo",
   description:
     "Crowdsourcing platform connecting organizations, researchers, and participants for impactful collaborations.",
   url: "https://unilink-platform.com",

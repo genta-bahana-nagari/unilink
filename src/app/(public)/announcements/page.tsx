@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { FiBell } from "react-icons/fi";
 import { Card } from "@/components/ui/card";
@@ -37,7 +37,7 @@ export default function AnnouncementsPage() {
           Announcements
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Stay updated with the latest news and updates from UniLink
+          Stay updated with the latest news and updates from Fivo
         </p>
       </div>
 
@@ -52,15 +52,17 @@ export default function AnnouncementsPage() {
               "hover:shadow-lg",
               "transition-all duration-300",
               "hover:border-primary/50",
-              "dark:hover:border-primary/50"
+              "dark:hover:border-primary/50",
             )}
           >
             <div className="flex items-center gap-2 mb-4">
-              <div className={cn(
-                "p-2 rounded-lg",
-                "bg-primary/10",
-                "dark:bg-primary/10"
-              )}>
+              <div
+                className={cn(
+                  "p-2 rounded-lg",
+                  "bg-primary/10",
+                  "dark:bg-primary/10",
+                )}
+              >
                 <FiBell size={16} className="text-primary" />
               </div>
               <Badge
